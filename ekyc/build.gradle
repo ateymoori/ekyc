@@ -12,9 +12,12 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+    }
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -34,11 +37,30 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    api 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
+    api('androidx.core:core-ktx:1.3.2',
+            'androidx.appcompat:appcompat:1.2.0',
+            'androidx.constraintlayout:constraintlayout:2.0.4',
+            'com.google.android.material:material:1.3.0',
+            'androidx.multidex:multidex:2.0.1',
+            'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
+            'com.github.ybq:Android-SpinKit:1.4.0',
+            'androidx.preference:preference-ktx:1.1.1',
+            'androidx.navigation:navigation-fragment-ktx:2.3.3',
+            'androidx.navigation:navigation-ui-ktx:2.3.3',
+            'com.airbnb.android:lottie:3.6.1',
+            'com.github.bumptech.glide:glide:4.12.0',
+            'com.karumi:dexter:6.2.2',
+            'com.google.code.gson:gson:2.8.6')
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //ML Kit
+    api('com.google.android.gms:play-services-mlkit-text-recognition:16.1.3',
+            'com.google.android.gms:play-services-mlkit-face-detection:16.1.4',
+            'com.otaliastudios:cameraview:2.6.2',
+            'com.google.guava:guava:30.1-jre')
+
+    androidTestImplementation('junit:junit:4.+',
+            'androidx.test.ext:junit:1.1.2',
+            'androidx.test.espresso:espresso-core:3.3.0')
 }
