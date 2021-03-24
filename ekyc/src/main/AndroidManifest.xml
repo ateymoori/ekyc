@@ -2,4 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lib.ekyc">
 
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application>
+        <activity
+            android:name=".presentation.ui.ExtractDocumentActivity"
+            android:screenOrientation="portrait" />
+
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="ocr,face" />
+    </application>
+
 </manifest>

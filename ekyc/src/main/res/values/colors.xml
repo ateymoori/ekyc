@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ekycPrimary">#FFF</color>
+    <color name="ekycDarkPrimary">#F8FAFF</color>
+    <color name="ekycAccent">#4DD0E1</color>
+    <color name="ekycPrimaryText">#012e52</color>
+    <color name="ekycTransparent">#00000000</color>
+    <color name="ekycPureBlack">#000000</color>
+    <color name="ekycError">#E06E6E</color>
+    <color name="ekycTextHint">#9E9E9E</color>
+</resources>
