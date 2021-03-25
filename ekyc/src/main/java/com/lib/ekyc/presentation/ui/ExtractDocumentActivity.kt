@@ -9,6 +9,7 @@ import android.os.Bundle
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
 import com.lib.ekyc.presentation.utils.BaseActivity
 import com.lib.ekyc.presentation.utils.PERMISSION_RESULT
+import com.lib.ekyc.presentation.utils.face.common.GraphicOverlay
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.EkycTextRecognitionProcessor
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
@@ -18,7 +19,12 @@ class ExtractDocumentActivity : BaseActivity() {
 
     private lateinit var binding: ActivityExtractDocumentBinding
     private var fileName: Long? = null
-    private lateinit var image:Bitmap
+    private lateinit var image: Bitmap
+
+
+
+    private val graphicOverlay: GraphicOverlay? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +36,7 @@ class ExtractDocumentActivity : BaseActivity() {
             Manifest.permission.CAMERA
         ) { result ->
             when (result) {
-                PERMISSION_RESULT.GRANTED ->  startCamera()
+                PERMISSION_RESULT.GRANTED -> startCamera()
                 else -> showError("Need permission")
             }
         }
@@ -38,6 +44,9 @@ class ExtractDocumentActivity : BaseActivity() {
         binding.captureBtn.setOnClickListener {
             fileName = System.currentTimeMillis()
             binding.camera.takePictureSnapshot()
+        }
+        binding.refreshImgv.setOnClickListener {
+            refreshView()
         }
 
         binding.camera.addCameraListener(object : CameraListener() {
@@ -51,19 +60,22 @@ class ExtractDocumentActivity : BaseActivity() {
             }
         })
 
-
         binding.nextBtn.setOnClickListener {
             EkycTextRecognitionProcessor(image)
         }
 
     }
 
-    private fun startCamera(){
+    private fun startCamera() {
         binding.camera.setLifecycleOwner(this)
     }
 
-      fun getFilePath(): String {
+    fun getFilePath(): String {
         val directory = ContextWrapper(applicationContext).getDir("imageDir", Context.MODE_PRIVATE)
         return File(directory, fileName.toString() + ".jpg").absolutePath
+    }
+
+    fun refreshView(){
+        binding.preview.setImageResource(0)
     }
 }

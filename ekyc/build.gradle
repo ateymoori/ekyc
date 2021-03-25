@@ -56,6 +56,7 @@ dependencies {
 
     //ML Kit
     api('com.google.android.gms:play-services-mlkit-text-recognition:16.1.3',
+            'com.google.firebase:firebase-ml-vision:24.0.3',
             'com.google.android.gms:play-services-mlkit-face-detection:16.1.4',
             'com.otaliastudios:cameraview:2.6.2',
             'com.google.guava:guava:30.1-jre')
@@ -64,3 +65,4 @@ dependencies {
             'androidx.test.ext:junit:1.1.2',
             'androidx.test.espresso:espresso-core:3.3.0')
 }
+

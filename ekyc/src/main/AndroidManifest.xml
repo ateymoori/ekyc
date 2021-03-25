@@ -4,11 +4,16 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
-    <application>
+    <application
+        android:name=".presentation.utils.MyApplication">
+        <activity
+            android:name=".presentation.ui.FaceDetectionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
         <activity
             android:name=".presentation.ui.ExtractDocumentActivity"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

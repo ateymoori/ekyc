@@ -15,4 +15,10 @@
         android:layout_height="wrap_content"
         android:text="Extract Document"/>
 
+    <Button
+        android:id="@+id/face"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Face Detection"/>
+
 </LinearLayout>
