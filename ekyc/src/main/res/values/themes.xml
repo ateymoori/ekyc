@@ -4,6 +4,8 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/darkGrayBG</item>
         <item name="colorPrimaryVariant">@color/darkGrayBG</item>
+        <item name="backgroundColor">@color/darkGrayBG</item>
+        <item name="background">@color/darkGrayBG</item>
 
 
         <item name="colorOnPrimary">@color/white</item>

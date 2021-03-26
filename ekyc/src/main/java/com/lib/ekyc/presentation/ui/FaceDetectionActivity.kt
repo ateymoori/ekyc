@@ -1,6 +1,7 @@
 package com.lib.ekyc.presentation.ui
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
@@ -23,14 +24,6 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
         binding = ActivityFaceDetectionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-//        binding.captureBtn.setOnClickListener {
-//            fileName = System.currentTimeMillis()
-//            binding.camera.takePictureSnapshot()
-//        }
-//        binding.refreshImgv.setOnClickListener {
-//            refreshView()
-//        }
 
         cameraSource = CameraSource(this, binding.fireFaceOverlay)
 
@@ -64,9 +57,7 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
 
     override fun onDestroy() {
         super.onDestroy()
-        if (cameraSource != null) {
-            cameraSource!!.release()
-        }
+        cameraSource?.release()
     }
 
 
@@ -81,10 +72,32 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
 
     override fun onFaceLocated(rectModel: RectModel?) {
         rectModel.toString().log("ekyc__ 4")
+        showSuccessMessage("Your face detected successfully")
+
     }
 
     override fun onFaceNotLocated() {
         "onFaceNotLocated".log("ekyc__ 5")
+        showErrorMessage("Face is not in correct area")
+    }
+
+    override fun onMultiFaceLocated() {
+        "onMultiFaceLocated".log("ekyc__ 3")
+        showErrorMessage("More than one face are in the screen")
+    }
+
+    override fun onErrorOnFace(msg: String) {
+         showErrorMessage(msg)
+    }
+
+    fun showSuccessMessage(msg:String){
+        binding.message.setTextColor(Color.GREEN)
+        binding.message.text = msg
+    }
+
+    fun showErrorMessage(msg:String){
+        binding.message.setTextColor(Color.RED)
+        binding.message.text = msg
     }
 
 }

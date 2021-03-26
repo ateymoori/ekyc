@@ -47,7 +47,7 @@ import java.util.Map;
  * displaying extra information). This receives preview frames from the camera at a specified rate,
  * sending those frames to child classes' detectors / classifiers as fast as it is able to process.
  */
-@SuppressLint("MissingPermission")
+@SuppressWarnings("ALL")
 public class CameraSource {
   @SuppressLint("InlinedApi")
   public static final int CAMERA_FACING_BACK = CameraInfo.CAMERA_FACING_BACK;
@@ -86,7 +86,7 @@ public class CameraSource {
 
   // These values may be requested by the caller.  Due to hardware limitations, we may need to
   // select close, but not exactly the same values for these.
-  private final float requestedFps = 20.0f;
+  private final float requestedFps = 25.0f;
   public final static int requestedPreviewWidth = 480;
   public final static int requestedPreviewHeight = 480;
   private final boolean requestedAutoFocus = true;
@@ -623,7 +623,11 @@ public class CameraSource {
      */
     @SuppressLint("Assert")
     void release() {
-      assert (processingThread.getState() == State.TERMINATED);
+      try{
+        assert (processingThread.getState() == State.TERMINATED);
+      }catch (Exception e){
+        //camera is released before
+      }
     }
 
     /** Marks the runnable as active/not active. Signals any blocked threads to continue. */

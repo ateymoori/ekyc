@@ -14,13 +14,17 @@
 package com.lib.ekyc.presentation.utils.face.common;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.images.Size;
 
@@ -37,6 +41,8 @@ public class CameraSourcePreview extends ViewGroup {
   private CameraSource cameraSource;
 
   private GraphicOverlay overlay;
+  DisplayMetrics displayMetrics = new DisplayMetrics();
+
 
   public CameraSourcePreview(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -123,8 +129,12 @@ public class CameraSourcePreview extends ViewGroup {
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    int width = 320;
-    int height = 240;
+    ((AppCompatActivity) context).getWindowManager()
+            .getDefaultDisplay()
+            .getMetrics(displayMetrics);
+    int height = displayMetrics.heightPixels/2;
+    int width = displayMetrics.widthPixels;
+
     if (cameraSource != null) {
       Size size = cameraSource.getPreviewSize();
       if (size != null) {

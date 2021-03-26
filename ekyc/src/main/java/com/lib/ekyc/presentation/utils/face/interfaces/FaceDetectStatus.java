@@ -5,5 +5,13 @@ import com.lib.ekyc.presentation.utils.face.common.RectModel;
 
 public interface FaceDetectStatus {
     void onFaceLocated(RectModel rectModel);
-    void onFaceNotLocated() ;
+
+    void onFaceNotLocated();
+
+
+    void onMultiFaceLocated();
+
+    void onErrorOnFace(String msg);
+
+
 }

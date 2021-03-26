@@ -35,8 +35,8 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
 
     private int facing;
 
-    private final Paint facePositionPaint;
-    private final Paint idPaint;
+    //    private final Paint facePositionPaint;
+//    private final Paint idPaint;
     private final Paint boxPaint;
 
     private volatile FirebaseVisionFace firebaseVisionFace;
@@ -52,19 +52,10 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         firebaseVisionFace = face;
         this.facing = facing;
         this.overlayBitmap = overlayBitmap;
-        final int selectedColor = Color.GREEN;
-
-        facePositionPaint = new Paint();
-        facePositionPaint.setColor(selectedColor);
-
-        idPaint = new Paint();
-        idPaint.setColor(selectedColor);
-        idPaint.setTextSize(ID_TEXT_SIZE);
-
         boxPaint = new Paint();
-        boxPaint.setColor(selectedColor);
         boxPaint.setStyle(Paint.Style.STROKE);
         boxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
+
     }
 
     /**
@@ -76,6 +67,9 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         if (face == null) {
             return;
         }
+
+        boxPaint.setColor(Color.GREEN);
+
 
         // Draws a circle at the position of the detected face, with the face's track id below.
         // An offset is used on the Y axis in order to draw the circle, face id and happiness level in the top area
@@ -90,7 +84,7 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         float top = y - yOffset;
         float right = x + xOffset;
         float bottom = y + yOffset;
-        canvas.drawRect(left, top, right, bottom, boxPaint);
+//        canvas.drawRect(left, top, right, bottom, boxPaint.setColor(Color.RED));
 
         if (
                 left < 190 &&
@@ -99,11 +93,24 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
                         bottom > 1050
         ) {
 
-            if (faceDetectStatus != null)
+            if (face.getLeftEyeOpenProbability() < 0.4) {
+                faceDetectStatus.onErrorOnFace("Left eye is close");
+            } else if (face.getRightEyeOpenProbability() < 0.4) {
+                faceDetectStatus.onErrorOnFace("Right eye is close");
+            } else if (faceDetectStatus != null) {
                 faceDetectStatus.onFaceLocated(new RectModel(left, top, right, bottom));
+            }
+
+
+            boxPaint.setColor(Color.GREEN);
         } else {
             if (faceDetectStatus != null) faceDetectStatus.onFaceNotLocated();
+
+            boxPaint.setColor(Color.RED);
+
         }
+
+        canvas.drawRect(left, top, right, bottom, boxPaint);
 
     }
 

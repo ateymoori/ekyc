@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.util.List;
 
 
-
 public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVisionFace>> implements FaceDetectStatus {
 
     private static final String TAG = "FaceDetectionProcessor";
@@ -100,6 +99,16 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
             FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing, overlayBitmap);
             faceGraphic.faceDetectStatus = this;
             graphicOverlay.add(faceGraphic);
+
+//            if (face.getLeftEyeOpenProbability() < 0.4) {
+//                onErrorOnFace("Left eye is close");
+//            }
+//            if (face.getRightEyeOpenProbability() < 0.4) {
+//                onErrorOnFace("Right eye is close");
+//            }
+        }
+        if (faces.size() > 1){
+            onMultiFaceLocated();
         }
         graphicOverlay.postInvalidate();
     }
@@ -117,5 +126,15 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
     @Override
     public void onFaceNotLocated() {
         if (faceDetectStatus != null) faceDetectStatus.onFaceNotLocated();
+    }
+
+    @Override
+    public void onMultiFaceLocated() {
+        if (faceDetectStatus != null) faceDetectStatus.onMultiFaceLocated();
+    }
+
+    @Override
+    public void onErrorOnFace(String msg) {
+        if (faceDetectStatus != null) faceDetectStatus.onErrorOnFace(msg);
     }
 }

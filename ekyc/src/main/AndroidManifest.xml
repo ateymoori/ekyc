@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lib.ekyc">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
 
-    <application
-        android:name=".presentation.utils.MyApplication">
+    <application android:name=".presentation.utils.MyApplication">
+        <activity
+            android:name=".presentation.ui.ExtractDocumentResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
         <activity
             android:name=".presentation.ui.FaceDetectionActivity"
             android:screenOrientation="portrait"
