@@ -6,6 +6,6 @@ import java.lang.Exception
 
 interface DocumentExtractHandler {
 
-    fun onExtractionFailed(image: Bitmap )
+    fun onExtractionFailed(image: Bitmap , msg:String?)
     fun onExtractionSuccess(image: Bitmap, visionText: Text)
 }

@@ -19,9 +19,21 @@ import java.io.File
 
 class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
 
+    private var mandatoryFields: java.util.ArrayList<String>? = null
     private lateinit var binding: ActivityExtractDocumentBinding
     private var fileName: Long? = null
     private lateinit var image: Bitmap
+
+    companion object {
+        fun start(
+            context: Context,
+            mandatoryFields: ArrayList<String>? = null
+        ) {
+            val starter = Intent(context, ExtractDocumentActivity::class.java)
+            starter.putStringArrayListExtra("list", mandatoryFields)
+            context.startActivity(starter)
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +41,8 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         binding = ActivityExtractDocumentBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        mandatoryFields = intent.getStringArrayListExtra("list")
 
         checkPermission(
             Manifest.permission.CAMERA
@@ -65,7 +79,7 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         })
 
         binding.nextBtn.setOnClickListener {
-            EkycTextRecognitionProcessor(image, this)
+            EkycTextRecognitionProcessor(image,mandatoryFields, this)
         }
 
     }
@@ -79,24 +93,24 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         return File(directory, fileName.toString() + ".jpg").absolutePath
     }
 
-    fun refreshView(){
+    fun refreshView() {
         binding.preview.setImageResource(0)
     }
 
-    override fun onExtractionFailed(image: Bitmap) {
+    override fun onExtractionFailed(image: Bitmap, msg: String?) {
+            msg.toast(this)
     }
 
     override fun onExtractionSuccess(image: Bitmap, visionText: Text) {
         val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
         anotherIntent.putExtra("image", getFilePath())
         anotherIntent.putExtra("result", visionText.text)
+        anotherIntent.putStringArrayListExtra("list", mandatoryFields)
         startActivity(anotherIntent)
         finish()
 
 
-     }
-
-
+    }
 
 
 }

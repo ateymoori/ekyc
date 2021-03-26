@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<View>(R.id.extract).setOnClickListener {
-            startActivity(Intent(this, ExtractDocumentActivity::class.java))
+           // ExtractDocumentActivity.start(this, arrayListOf("name" , "sex"))
+            ExtractDocumentActivity.start(this )
         }
         findViewById<View>(R.id.face).setOnClickListener {
             startActivity(Intent(this, FaceDetectionActivity::class.java))
