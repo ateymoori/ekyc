@@ -18,7 +18,7 @@ import com.lib.ekyc.presentation.utils.face.interfaces.FrameReturn
 import java.io.IOException
 
 class FaceDetectionProcessor(resources: Resources?) :
-    VisionProcessorBaseKT<List<FirebaseVisionFace?>?>(), FaceDetectStatus {
+    VisionProcessorBase<List<FirebaseVisionFace?>?>(), FaceDetectStatus {
     var faceDetectStatus: FaceDetectStatus? = null
     private val detector: FirebaseVisionFaceDetector
     private val overlayBitmap: Bitmap
@@ -41,13 +41,13 @@ class FaceDetectionProcessor(resources: Resources?) :
     override fun onSuccess(
         originalCameraImage: Bitmap?,
         results: List<FirebaseVisionFace?>?,
-        frameMetadata: FrameMetaDataKT,
+        frameMetadata: FrameMetaData,
         graphicOverlay: GraphicOverlay
     ) {
 
         graphicOverlay.clear()
         if (originalCameraImage != null) {
-            val imageGraphic = CameraImageGraphicKT(graphicOverlay, originalCameraImage)
+            val imageGraphic = CameraImageGraphic(graphicOverlay, originalCameraImage)
             graphicOverlay.add(imageGraphic)
         }
         results?.forEach { face ->
@@ -80,7 +80,7 @@ class FaceDetectionProcessor(resources: Resources?) :
         Log.e(TAG, "Face detection failed $e")
     }
 
-    override fun onFaceLocated(rectModel: RectModelKT?) {
+    override fun onFaceLocated(rectModel: RectModel?) {
         if (faceDetectStatus != null) faceDetectStatus!!.onFaceLocated(rectModel)
     }
 

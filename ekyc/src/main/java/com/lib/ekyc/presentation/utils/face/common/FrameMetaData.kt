@@ -1,7 +1,7 @@
 package com.lib.ekyc.presentation.utils.face.common
 
 
-class FrameMetaDataKT private constructor(
+class FrameMetaData private constructor(
     val width: Int,
     val height: Int,
     val rotation: Int,
@@ -36,8 +36,8 @@ class FrameMetaDataKT private constructor(
             return this
         }
 
-        fun build(): FrameMetaDataKT {
-            return FrameMetaDataKT(width, height, rotation, cameraFacing)
+        fun build(): FrameMetaData {
+            return FrameMetaData(width, height, rotation, cameraFacing)
         }
     }
 }

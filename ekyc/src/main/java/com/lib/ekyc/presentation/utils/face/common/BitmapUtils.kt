@@ -8,11 +8,11 @@ import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 
 
-class BitmapUtilsKT {
+class BitmapUtils {
 
     companion object {
 
-        fun getBitmap(data: ByteBuffer, metadata: FrameMetaDataKT): Bitmap? {
+        fun getBitmap(data: ByteBuffer, metadata: FrameMetaData): Bitmap? {
             data.rewind()
             val imageInBuffer = ByteArray(data.limit())
             data[imageInBuffer, 0, imageInBuffer.size]

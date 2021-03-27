@@ -15,7 +15,7 @@ package com.lib.ekyc.presentation.utils.face.interfaces;
 
 import android.graphics.Bitmap;
 
-import com.lib.ekyc.presentation.utils.face.common.FrameMetaDataKT
+import com.lib.ekyc.presentation.utils.face.common.FrameMetaData
 import com.lib.ekyc.presentation.utils.face.common.GraphicOverlay;
 
 import java.nio.ByteBuffer;
@@ -25,7 +25,7 @@ import java.nio.ByteBuffer;
 interface VisionImageProcessor {
 
     /** Processes the images with the underlying machine learning models. */
-    fun process(data: ByteBuffer, frameMetadata: FrameMetaDataKT, graphicOverlay: GraphicOverlay)
+    fun process(data: ByteBuffer, frameMetadata: FrameMetaData, graphicOverlay: GraphicOverlay)
 
 
     /** Processes the bitmap images. */

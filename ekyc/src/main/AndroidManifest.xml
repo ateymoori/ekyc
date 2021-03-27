@@ -4,9 +4,16 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <uses-feature android:name="android.hardware.camera" />
 
+
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-feature android:name="android.hardware.nfc"/>
+
+
     <application android:name=".presentation.utils.MyApplication">
+        <activity android:name=".presentation.ui.NFCReaderActivity"></activity>
         <activity
             android:name=".presentation.ui.ExtractDocumentResultActivity"
             android:screenOrientation="portrait"

@@ -5,29 +5,29 @@ import androidx.annotation.GuardedBy
 import com.google.android.gms.tasks.Task
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
-import com.lib.ekyc.presentation.utils.face.common.BitmapUtilsKT.Companion.getBitmap
+import com.lib.ekyc.presentation.utils.face.common.BitmapUtils.Companion.getBitmap
 import com.lib.ekyc.presentation.utils.face.interfaces.VisionImageProcessor
 import java.nio.ByteBuffer
 
 
-abstract class VisionProcessorBaseKT<T> : VisionImageProcessor {
+abstract class VisionProcessorBase<T> : VisionImageProcessor {
     // To keep the latest images and its metadata.
     @GuardedBy("this")
     private var latestImage: ByteBuffer? = null
 
     @GuardedBy("this")
-    private var latestImageMetaData: FrameMetaDataKT? = null
+    private var latestImageMetaData: FrameMetaData? = null
 
     // To keep the images and metadata in process.
     @GuardedBy("this")
     private var processingImage: ByteBuffer? = null
 
     @GuardedBy("this")
-    private var processingMetaData: FrameMetaDataKT? = null
+    private var processingMetaData: FrameMetaData? = null
 
     @Synchronized
     override fun process(
-        data: ByteBuffer, frameMetadata: FrameMetaDataKT, graphicOverlay: GraphicOverlay
+        data: ByteBuffer, frameMetadata: FrameMetaData, graphicOverlay: GraphicOverlay
     ) {
         latestImage = data
         latestImageMetaData = frameMetadata
@@ -56,7 +56,7 @@ abstract class VisionProcessorBaseKT<T> : VisionImageProcessor {
     }
 
     private fun processImage(
-        data: ByteBuffer, frameMetadata: FrameMetaDataKT,
+        data: ByteBuffer, frameMetadata: FrameMetaData,
         graphicOverlay: GraphicOverlay
     ) {
         val metadata = FirebaseVisionImageMetadata.Builder()
@@ -75,19 +75,19 @@ abstract class VisionProcessorBaseKT<T> : VisionImageProcessor {
     private fun detectInVisionImage(
         originalCameraImage: Bitmap?,
         image: FirebaseVisionImage,
-        metadata: FrameMetaDataKT?,
+        metadata: FrameMetaData?,
         graphicOverlay: GraphicOverlay
     ) {
         detectInImage(image)
             .addOnSuccessListener { results ->
-                this@VisionProcessorBaseKT.onSuccess(
+                this@VisionProcessorBase.onSuccess(
                     originalCameraImage, results,
                     metadata!!,
                     graphicOverlay
                 )
                 processLatestImage(graphicOverlay)
             }
-            .addOnFailureListener { e -> this@VisionProcessorBaseKT.onFailure(e) }
+            .addOnFailureListener { e -> this@VisionProcessorBase.onFailure(e) }
     }
 
     override fun stop() {}
@@ -102,7 +102,7 @@ abstract class VisionProcessorBaseKT<T> : VisionImageProcessor {
     protected abstract fun onSuccess(
         originalCameraImage: Bitmap?,
         results: T,
-        frameMetadata: FrameMetaDataKT,
+        frameMetadata: FrameMetaData,
         graphicOverlay: GraphicOverlay
     )
 

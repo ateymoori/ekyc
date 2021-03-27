@@ -64,13 +64,13 @@ class FaceDetectionActivity : AppCompatActivity(),FrameReturn, FaceDetectStatus 
     override fun onFrame(
         image: Bitmap?,
         face: FirebaseVisionFace?,
-        frameMetadata: FrameMetaDataKT?,
+        frameMetadata: FrameMetaData?,
         graphicOverlay: GraphicOverlay?
     ) {
         face.toString().log("ekyc__ 3")
     }
 
-    override fun onFaceLocated(rectModel: RectModelKT?) {
+    override fun onFaceLocated(rectModel: RectModel?) {
         showSuccessMessage("Your face detected successfully")
         binding.captureBtn.slideUp()
 

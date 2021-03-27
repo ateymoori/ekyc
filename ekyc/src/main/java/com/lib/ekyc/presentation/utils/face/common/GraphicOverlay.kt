@@ -28,7 +28,7 @@ import java.util.*
  * coordinate from the preview's coordinate system to the view coordinate system.
  *
  */
-class GraphicOverlayKT(context: Context?, attrs: AttributeSet?) :
+class GraphicOverlay(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
     private val lock = Any()
     private var previewWidth = 0
@@ -43,8 +43,8 @@ class GraphicOverlayKT(context: Context?, attrs: AttributeSet?) :
      * this and implement the [Graphic.draw] method to define the graphics element. Add
      * instances to the overlay using [GraphicOverlay.add].
      */
-    abstract class Graphic(private val overlay: GraphicOverlayKT) {
-        abstract fun draw(canvas: Canvas?)
+    abstract class Graphic(private val overlay: GraphicOverlay) {
+        abstract fun draw(canvas: Canvas)
 
         /**
          * Adjusts a horizontal value of the supplied value from the preview scale to the view scale.

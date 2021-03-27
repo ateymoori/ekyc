@@ -1,10 +1,10 @@
 package com.lib.ekyc.presentation.utils.face.interfaces;
 
 
-import com.lib.ekyc.presentation.utils.face.common.RectModelKT;
+import com.lib.ekyc.presentation.utils.face.common.RectModel;
 
 interface FaceDetectStatus {
-    fun onFaceLocated(rectModel: RectModelKT?)
+    fun onFaceLocated(rectModel: RectModel?)
 
     fun onFaceNotLocated()
 
