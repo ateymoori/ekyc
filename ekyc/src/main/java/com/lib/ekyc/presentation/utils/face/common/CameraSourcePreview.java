@@ -129,12 +129,8 @@ public class CameraSourcePreview extends ViewGroup {
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    ((AppCompatActivity) context).getWindowManager()
-            .getDefaultDisplay()
-            .getMetrics(displayMetrics);
-    int height = displayMetrics.heightPixels/2;
-    int width = displayMetrics.widthPixels;
-
+    int width = 320;
+    int height = 240;
     if (cameraSource != null) {
       Size size = cameraSource.getPreviewSize();
       if (size != null) {
@@ -155,7 +151,8 @@ public class CameraSourcePreview extends ViewGroup {
 
     // Computes height and width for potentially doing fit width.
     int childWidth = layoutWidth;
-    int childHeight = (int) (((float) layoutWidth / (float) width) * height);
+ //   int childHeight = (int) (((float) layoutWidth / (float) width) * height);
+    int childHeight = layoutHeight;
 
     // If height is too tall using fit width, does fit height instead.
     if (childHeight > layoutHeight) {

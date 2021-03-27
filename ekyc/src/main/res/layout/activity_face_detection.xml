@@ -52,7 +52,7 @@
                 app:layout_drawOnPreview="true" />
 
             <com.lib.ekyc.presentation.utils.face.common.GraphicOverlay
-                android:id="@+id/fireFaceOverlay"
+                android:id="@+id/faceOverlay"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:elevation="10dp" />
@@ -76,7 +76,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:padding="12dp"
-            android:text="sdcsc"
+            android:text=""
             android:textColor="#fff"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textView"
@@ -91,7 +91,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:padding="12dp"
-            android:text="Make sure just your face is in the center of screen and your eyes are wide open."
+            android:text="Make sure just your face is in the center of screen."
             android:textColor="#fff"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/captureBtn"
@@ -110,27 +110,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Next"
-            app:layout_constraintBottom_toBottomOf="@+id/captureBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/captureBtn" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/refreshImgv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/captureBtn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/captureBtn"
-            app:srcCompat="@drawable/ic_refresh"
-            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
