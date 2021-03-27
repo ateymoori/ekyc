@@ -18,7 +18,7 @@ import com.lib.ekyc.presentation.utils.face.interfaces.FrameReturn
 import java.io.IOException
 
 class FaceDetectionProcessor(resources: Resources?) :
-    VisionProcessorBase<List<FirebaseVisionFace?>?>(), FaceDetectStatus {
+    VisionProcessorBaseKT<List<FirebaseVisionFace?>?>(), FaceDetectStatus {
     var faceDetectStatus: FaceDetectStatus? = null
     private val detector: FirebaseVisionFaceDetector
     private val overlayBitmap: Bitmap
@@ -34,23 +34,23 @@ class FaceDetectionProcessor(resources: Resources?) :
         }
     }
 
-    override fun detectInImage(image: FirebaseVisionImage): Task<List<FirebaseVisionFace?>?>{
+    override fun detectInImage(image: FirebaseVisionImage): Task<List<FirebaseVisionFace?>?> {
         return detector.detectInImage(image)
     }
 
     override fun onSuccess(
         originalCameraImage: Bitmap?,
-        faces: List<FirebaseVisionFace?>,
-        frameMetadata: FrameMetadata,
+        results: List<FirebaseVisionFace?>?,
+        frameMetadata: FrameMetaDataKT,
         graphicOverlay: GraphicOverlay
     ) {
+
         graphicOverlay.clear()
         if (originalCameraImage != null) {
-            val imageGraphic = CameraImageGraphic(graphicOverlay, originalCameraImage)
+            val imageGraphic = CameraImageGraphicKT(graphicOverlay, originalCameraImage)
             graphicOverlay.add(imageGraphic)
         }
-        for (i in faces.indices) {
-            val face = faces[i]
+        results?.forEach { face ->
             if (frameHandler != null) {
                 frameHandler!!.onFrame(originalCameraImage, face, frameMetadata, graphicOverlay)
             }
@@ -70,7 +70,7 @@ class FaceDetectionProcessor(resources: Resources?) :
 //                onErrorOnFace("Right eye is close");
 //            }
         }
-        if (faces.size > 1) {
+        if (!results.isNullOrEmpty() && results.size > 1) {
             onMultiFaceLocated()
         }
         graphicOverlay.postInvalidate()
@@ -80,7 +80,7 @@ class FaceDetectionProcessor(resources: Resources?) :
         Log.e(TAG, "Face detection failed $e")
     }
 
-    override fun onFaceLocated(rectModel: RectModel?) {
+    override fun onFaceLocated(rectModel: RectModelKT?) {
         if (faceDetectStatus != null) faceDetectStatus!!.onFaceLocated(rectModel)
     }
 
@@ -108,4 +108,6 @@ class FaceDetectionProcessor(resources: Resources?) :
         detector = FirebaseVision.getInstance().getVisionFaceDetector(options)
         overlayBitmap = BitmapFactory.decodeResource(resources, R.drawable.clown_nose)
     }
+
+
 }

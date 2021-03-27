@@ -7,7 +7,7 @@ import android.graphics.Paint
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
 import com.lib.ekyc.presentation.utils.face.common.GraphicOverlay
 import com.lib.ekyc.presentation.utils.face.common.GraphicOverlay.Graphic
-import com.lib.ekyc.presentation.utils.face.common.RectModel
+import com.lib.ekyc.presentation.utils.face.common.RectModelKT
 import com.lib.ekyc.presentation.utils.face.interfaces.FaceDetectStatus
 
 
@@ -56,7 +56,7 @@ class FaceGraphic internal constructor(
                     faceDetectStatus.onErrorOnFace("Right eye is close")
                 }
                 else -> {
-                    faceDetectStatus.onFaceLocated(RectModel(left, top, right, bottom))
+                    faceDetectStatus.onFaceLocated(RectModelKT(left, top, right, bottom))
                 }
             }
             boxPaint.color = Color.GREEN

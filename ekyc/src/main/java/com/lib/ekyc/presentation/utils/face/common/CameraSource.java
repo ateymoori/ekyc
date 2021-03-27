@@ -720,7 +720,7 @@ public class CameraSource {
             Log.d(TAG, "Process an image");
             frameProcessor.process(
                 data,
-                new FrameMetadata.Builder()
+                new FrameMetaDataKT.Builder()
                     .setWidth(previewSize.getWidth())
                     .setHeight(previewSize.getHeight())
                     .setRotation(rotation)

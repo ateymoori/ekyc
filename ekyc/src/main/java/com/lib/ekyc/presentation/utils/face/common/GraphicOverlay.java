@@ -46,7 +46,7 @@ public class GraphicOverlay extends View {
   private float widthScaleFactor = 1.0f;
   private int previewHeight;
   private float heightScaleFactor = 1.0f;
-  private int facing = CameraSource.CAMERA_FACING_BACK;
+    int facing = CameraSource.CAMERA_FACING_BACK;
   private final List<Graphic> graphics = new ArrayList<>();
 
   /**

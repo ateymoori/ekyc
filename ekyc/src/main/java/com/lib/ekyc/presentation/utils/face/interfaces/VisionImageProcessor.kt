@@ -15,18 +15,17 @@ package com.lib.ekyc.presentation.utils.face.interfaces;
 
 import android.graphics.Bitmap;
 
-import com.google.firebase.ml.common.FirebaseMLException;
-import com.lib.ekyc.presentation.utils.face.common.FrameMetadata;
+import com.lib.ekyc.presentation.utils.face.common.FrameMetaDataKT
 import com.lib.ekyc.presentation.utils.face.common.GraphicOverlay;
 
 import java.nio.ByteBuffer;
 
 
-/** An inferface to process the images with different ML Kit detectors and custom image models. */
+/** An interface to process the images with different ML Kit detectors and custom image models. */
 interface VisionImageProcessor {
 
     /** Processes the images with the underlying machine learning models. */
-    fun process(data: ByteBuffer, frameMetadata: FrameMetadata, graphicOverlay: GraphicOverlay)
+    fun process(data: ByteBuffer, frameMetadata: FrameMetaDataKT, graphicOverlay: GraphicOverlay)
 
 
     /** Processes the bitmap images. */
