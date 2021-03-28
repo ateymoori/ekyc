@@ -1,6 +1,7 @@
 package com.lib.ekyc.presentation.ui
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -10,6 +11,11 @@ import android.os.Bundle
 import com.google.mlkit.vision.text.Text
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
 import com.lib.ekyc.presentation.utils.*
+import com.lib.ekyc.presentation.utils.KYC.Companion.DETECTION_TYPE
+import com.lib.ekyc.presentation.utils.KYC.Companion.MANDATORY_LIST
+import com.lib.ekyc.presentation.utils.KYC.Companion.RESULTS
+import com.lib.ekyc.presentation.utils.KYC.Companion.SCAN_DOCUMENT_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.KYC.Companion.SCAN_DOCUMENT_RESULTS_REQUEST_CODE
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.DocumentExtractHandler
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.EkycTextRecognitionProcessor
 import com.otaliastudios.cameraview.CameraListener
@@ -23,18 +29,21 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
     private lateinit var binding: ActivityExtractDocumentBinding
     private var fileName: Long? = null
     private lateinit var image: Bitmap
+    private lateinit var outPutResult: String
+    private lateinit var detectionType: DetectionType
 
     companion object {
         fun start(
-            context: Context,
+            activity: Activity,
+            detectionType: DetectionType,
             mandatoryFields: ArrayList<String>? = null
         ) {
-            val starter = Intent(context, ExtractDocumentActivity::class.java)
-            starter.putStringArrayListExtra("list", mandatoryFields)
-            context.startActivity(starter)
+            val starter = Intent(activity, ExtractDocumentActivity::class.java)
+            starter.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
+            starter.putExtra(DETECTION_TYPE, detectionType.ordinal)
+            activity.startActivityForResult(starter, SCAN_DOCUMENT_REQUEST_CODE)
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +51,11 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         val view = binding.root
         setContentView(view)
 
-        mandatoryFields = intent.getStringArrayListExtra("list")
+        mandatoryFields = intent.getStringArrayListExtra(MANDATORY_LIST)
+        detectionType = DetectionType.values()[intent.getIntExtra(
+            DETECTION_TYPE,
+            DetectionType.DOCUMENT.ordinal
+        )]
 
         checkPermission(
             Manifest.permission.CAMERA
@@ -79,7 +92,7 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         })
 
         binding.nextBtn.setOnClickListener {
-            EkycTextRecognitionProcessor(image,mandatoryFields, this)
+            EkycTextRecognitionProcessor(image, mandatoryFields, this)
         }
 
     }
@@ -95,21 +108,50 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
 
     fun refreshView() {
         binding.preview.setImageResource(0)
+        binding.captureBtn.slideUp()
+        binding.refreshImgv.slideDown()
+        binding.nextBtn.slideDown()
     }
 
     override fun onExtractionFailed(image: Bitmap, msg: String?) {
-            msg.toast(this)
+        msg.toast(this)
     }
 
     override fun onExtractionSuccess(image: Bitmap, visionText: Text) {
-        val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
-        anotherIntent.putExtra("image", getFilePath())
-        anotherIntent.putExtra("result", visionText.text)
-        anotherIntent.putStringArrayListExtra("list", mandatoryFields)
-        startActivity(anotherIntent)
-        finish()
+        outPutResult = visionText.text
 
 
+        when (detectionType) {
+            DetectionType.FACE -> TODO()
+            DetectionType.DOCUMENT -> {
+                val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
+                anotherIntent.putExtra(KYC.IMAGE_URL, getFilePath())
+                anotherIntent.putExtra(RESULTS, visionText.text)
+                anotherIntent.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
+                startActivityForResult(anotherIntent, SCAN_DOCUMENT_RESULTS_REQUEST_CODE)
+            }
+            DetectionType.DOCUMENT_NFC -> {
+                startActivity(Intent(this, NFCReaderActivity::class.java))
+            }
+        }
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //document extraction
+        if (requestCode == KYC.SCAN_DOCUMENT_RESULTS_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val resultIntent = Intent()
+                resultIntent.putExtra(KYC.IMAGE_URL, getFilePath())
+                resultIntent.putExtra(RESULTS, outPutResult)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            } else {
+                refreshView()
+            }
+        }
     }
 
 

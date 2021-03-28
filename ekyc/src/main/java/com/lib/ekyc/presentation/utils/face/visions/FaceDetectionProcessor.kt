@@ -54,8 +54,8 @@ class FaceDetectionProcessor(resources: Resources?) :
             if (frameHandler != null) {
                 frameHandler!!.onFrame(originalCameraImage, face, frameMetadata, graphicOverlay)
             }
-            val cameraFacing = frameMetadata.cameraFacing ?: Camera.CameraInfo.CAMERA_FACING_BACK
-            // FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing, overlayBitmap);
+            val cameraFacing = frameMetadata.cameraFacing
+
             val faceGraphic = FaceGraphic(
                 graphicOverlay,
                 face!!, cameraFacing, overlayBitmap
@@ -63,12 +63,6 @@ class FaceDetectionProcessor(resources: Resources?) :
             faceGraphic.faceDetectStatus = this
             graphicOverlay.add(faceGraphic)
 
-//            if (face.getLeftEyeOpenProbability() < 0.4) {
-//                onErrorOnFace("Left eye is close");
-//            }
-//            if (face.getRightEyeOpenProbability() < 0.4) {
-//                onErrorOnFace("Right eye is close");
-//            }
         }
         if (!results.isNullOrEmpty() && results.size > 1) {
             onMultiFaceLocated()

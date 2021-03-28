@@ -8,7 +8,7 @@
     android:gravity="top|center"
     android:orientation="vertical"
     android:padding="32dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="200dp"
         android:layout_marginTop="8dp"
         app:lottie_autoPlay="true"
         app:lottie_fileName="kyc_animation.json"
@@ -139,7 +139,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_scan_document"
+            android:src="@drawable/ic_face_detect"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

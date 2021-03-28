@@ -165,7 +165,7 @@ class NFCReaderActivity : AppCompatActivity() {
             if (!allFaceImageInfos.isEmpty()) {
                 val faceImageInfo = allFaceImageInfos.iterator().next()
                 val image: Image = ImageUtil.getImage(this , faceImageInfo)
-                binding.image.setImageBitmap(image.getBitmapImage())
+                binding.image.setImageBitmap(image.bitmapImage)
             }
 
 

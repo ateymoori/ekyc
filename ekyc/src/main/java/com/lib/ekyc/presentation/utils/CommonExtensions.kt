@@ -36,7 +36,7 @@ fun Any?.log(tag: String? = "app_debug") {
 }
 
 fun String?.toast(ctx: Context) {
-    Toast.makeText(ctx, this, Toast.LENGTH_LONG).show()
+    Toast.makeText(ctx, this?:"--", Toast.LENGTH_LONG).show()
 }
 
 fun Int.fixTwoZero(): String {

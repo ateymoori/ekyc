@@ -47,18 +47,23 @@ class FaceGraphic internal constructor(
         val right = x + xOffset
         val bottom = y + yOffset
         //        canvas.drawRect(left, top, right, bottom, boxPaint.setColor(Color.RED));
+//        if (left < 190 && top < 450 && right > 850 && bottom > 1050) {
         if (left < 190 && top < 450 && right > 850 && bottom > 1050) {
-            when {
-                face.leftEyeOpenProbability < 0.4 -> {
-                    faceDetectStatus.onErrorOnFace("Left eye is close")
-                }
-                face.rightEyeOpenProbability < 0.4 -> {
-                    faceDetectStatus.onErrorOnFace("Right eye is close")
-                }
-                else -> {
-                    faceDetectStatus.onFaceLocated(RectModel(left, top, right, bottom))
-                }
-            }
+
+            faceDetectStatus.onFaceLocated(RectModel(left, top, right, bottom))
+
+            //uncomment if you want check eyes status as well
+//            when {
+//                face.leftEyeOpenProbability < 0.4 -> {
+//                    faceDetectStatus.onErrorOnFace("Left eye is close")
+//                }
+//                face.rightEyeOpenProbability < 0.4 -> {
+//                    faceDetectStatus.onErrorOnFace("Right eye is close")
+//                }
+//                else -> {
+//                    faceDetectStatus.onFaceLocated(RectModel(left, top, right, bottom))
+//                }
+//            }
             boxPaint.color = Color.GREEN
         } else {
             faceDetectStatus.onFaceNotLocated()
