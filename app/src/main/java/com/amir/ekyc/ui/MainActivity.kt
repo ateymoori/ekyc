@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.extractDocumentContainer).setOnClickListener {
 
-//            ExtractDocumentActivity.start(
-//                activity = this,
-//                detectionType = DetectionType.DOCUMENT
-//            )
+            ExtractDocumentActivity.start(
+                activity = this,
+                detectionType = DetectionType.DOCUMENT
+            )
             ExtractDocumentActivity.start(
                 activity = this,
                 detectionType = DetectionType.DOCUMENT,
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         //face detection
         if (requestCode == KYC.FACE_DETECTION_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -73,7 +72,5 @@ class MainActivity : AppCompatActivity() {
                 "$results".toast(this)
             }
         }
-
-
     }
 }
