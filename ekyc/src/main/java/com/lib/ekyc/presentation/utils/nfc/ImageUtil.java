@@ -58,17 +58,6 @@ public class ImageUtil {
         return image;
     }
 
-    public static Bitmap scaleImage(Bitmap bitmap) {
-        Bitmap bitmapImage = null;
-        if (bitmap != null) {
-            double ratio = 400.0 / bitmap.getHeight();
-            int targetHeight = (int) (bitmap.getHeight() * ratio);
-            int targetWidth = (int) (bitmap.getWidth() * ratio);
-            bitmapImage = Bitmap.createScaledBitmap(bitmap, targetWidth, targetHeight, false);
-        }
-
-        return bitmapImage;
-    }
 
     public static Bitmap decodeImage(Context context, String mimeType, InputStream inputStream) throws IOException {
 

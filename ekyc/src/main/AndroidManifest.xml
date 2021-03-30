@@ -4,26 +4,25 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.NFC" />
 
-    <uses-permission android:name="android.permission.NFC"/>
-    <uses-feature android:name="android.hardware.nfc"/>
+    <uses-feature android:name="android.hardware.nfc" />
 
-
-    <application android:name=".presentation.utils.MyApplication">
-        <activity android:name=".presentation.ui.NFCReaderActivity"></activity>
+    <application android:name=".presentation.utils.base.MyApplication">
+        <activity android:name=".presentation.ui.nfc.GetDataForNFCEncryptionActivity"></activity>
+        <activity android:name=".presentation.ui.nfc.NFCReaderActivity" />
         <activity
-            android:name=".presentation.ui.ExtractDocumentResultActivity"
+            android:name=".presentation.ui.document.ExtractDocumentResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Ekyc" />
         <activity
-            android:name=".presentation.ui.FaceDetectionActivity"
+            android:name=".presentation.ui.face.FaceDetectionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Ekyc" />
         <activity
-            android:name=".presentation.ui.ExtractDocumentActivity"
+            android:name=".presentation.ui.document.ExtractDocumentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Ekyc" />
 

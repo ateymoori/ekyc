@@ -1,4 +1,4 @@
-package com.lib.ekyc.presentation.ui
+package com.lib.ekyc.presentation.ui.document
 
 import android.app.Activity
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lib.ekyc.databinding.ActivityExtractDocumentResultBinding
-import com.lib.ekyc.presentation.utils.KYC
-import com.lib.ekyc.presentation.utils.KYC.Companion.RESULTS
+import com.lib.ekyc.presentation.utils.base.KYC
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
 
 class ExtractDocumentResultActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.lib.ekyc.presentation.ui
+package com.lib.ekyc.presentation.ui.face
 
 import android.app.Activity
 import android.content.Intent
@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
 import com.lib.ekyc.databinding.ActivityFaceDetectionBinding
 import com.lib.ekyc.presentation.utils.*
-import com.lib.ekyc.presentation.utils.BitmapUtils
-import com.lib.ekyc.presentation.utils.KYC.Companion.FACE_DETECTION_REQUEST_CODE
-import com.lib.ekyc.presentation.utils.KYC.Companion.IMAGE_URL
+import com.lib.ekyc.presentation.utils.base.BitmapUtils
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.FACE_DETECTION_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.IMAGE_URL
 import com.lib.ekyc.presentation.utils.face.common.*
 import com.lib.ekyc.presentation.utils.face.interfaces.FaceDetectStatus
 import com.lib.ekyc.presentation.utils.face.interfaces.FrameReturn

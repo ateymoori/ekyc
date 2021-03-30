@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="darkGrayBG">#191919</color>
+    <color name="grayLight">#BDBDBD</color>
 
 
 </resources>

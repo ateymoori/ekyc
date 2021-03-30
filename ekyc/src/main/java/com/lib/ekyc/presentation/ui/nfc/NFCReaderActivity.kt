@@ -1,5 +1,6 @@
-package com.lib.ekyc.presentation.ui
+package com.lib.ekyc.presentation.ui.nfc
 
+import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
@@ -8,10 +9,18 @@ import android.nfc.Tag
 import android.nfc.tech.IsoDep
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.lib.ekyc.databinding.ActivityNfcReaderBinding
-import com.lib.ekyc.presentation.utils.log
+import com.lib.ekyc.presentation.utils.base.*
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.BIRTHDATE
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.EXPIRY
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.NFC_TIMEOUT
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.PASSPORT_NUMBER
+import com.lib.ekyc.presentation.utils.gone
 import com.lib.ekyc.presentation.utils.nfc.Image
 import com.lib.ekyc.presentation.utils.nfc.ImageUtil
+import com.lib.ekyc.presentation.utils.toast
+import com.lib.ekyc.presentation.utils.visible
 import net.sf.scuba.smartcards.CardService
 import org.jmrtd.BACKey
 import org.jmrtd.BACKeySpec
@@ -19,13 +28,11 @@ import org.jmrtd.PassportService
 import org.jmrtd.PassportService.DEFAULT_MAX_BLOCKSIZE
 import org.jmrtd.PassportService.NORMAL_MAX_TRANCEIVE_LENGTH
 import org.jmrtd.lds.CardSecurityFile
-import org.jmrtd.lds.LDSFileUtil
 import org.jmrtd.lds.PACEInfo
 import org.jmrtd.lds.icao.DG1File
 import org.jmrtd.lds.icao.DG2File
 import org.jmrtd.lds.iso19794.FaceImageInfo
 import java.util.ArrayList
-
 
 class NFCReaderActivity : AppCompatActivity() {
 
@@ -33,15 +40,21 @@ class NFCReaderActivity : AppCompatActivity() {
 
     private var adapter: NfcAdapter? = null
 
-    var passportNumber = "N46409799"
-    var expirationDate = "230902"
-    var birthDate = "890703"
+    var passportNumber: String? = null
+    var expirationDate: String? = null
+    var birthDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNfcReaderBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        binding.guidContainer.visible()
+        binding.resultContainer.gone()
+
+        passportNumber = intent.getStringExtra(PASSPORT_NUMBER)?.toUpperCase()
+        expirationDate = intent.getStringExtra(EXPIRY)
+        birthDate = intent.getStringExtra(BIRTHDATE)
     }
 
     override fun onResume() {
@@ -76,11 +89,10 @@ class NFCReaderActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-
         if (NfcAdapter.ACTION_TECH_DISCOVERED == intent.action) {
             val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
             IsoDep.get(tag)?.let { isoDepTag ->
-                isoDepTag.timeout = 7*1000
+                isoDepTag.timeout = NFC_TIMEOUT
                 val bacKey: BACKeySpec = BACKey(passportNumber, birthDate, expirationDate)
                 process(IsoDep.get(tag), bacKey)
             }
@@ -93,7 +105,8 @@ class NFCReaderActivity : AppCompatActivity() {
             adapter!!.disableForegroundDispatch(this)
         }
     }
-    fun process(
+
+    private fun process(
         isoDep: IsoDep,
         bacKey: BACKeySpec
     ) {
@@ -110,9 +123,7 @@ class NFCReaderActivity : AppCompatActivity() {
             )
             service.open()
             var paceSucceeded = false
-            bacKey.toString().log("nfc_pass 4")
             try {
-                bacKey.toString().log("nfc_pass 5")
                 val cardSecurityFile =
                     CardSecurityFile(service.getInputStream(PassportService.EF_CARD_SECURITY))
                 val securityInfoCollection = cardSecurityFile.securityInfos
@@ -129,7 +140,7 @@ class NFCReaderActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                e.toString().log("nfc_passport 6")
+                e.message.toast(this)
             }
             service.sendSelectApplet(paceSucceeded)
             if (!paceSucceeded) {
@@ -144,16 +155,8 @@ class NFCReaderActivity : AppCompatActivity() {
             val dg1In = service.getInputStream(PassportService.EF_DG1)
             val dg1File = DG1File(dg1In)
             val mrzInfo = dg1File.mrzInfo
-            mrzInfo.gender.log("nfc_passport 7")
-            mrzInfo.dateOfBirth.log("nfc_passport 7")
-            mrzInfo.dateOfExpiry.log("nfc_passport 7")
-            mrzInfo.issuingState.log("nfc_passport 7")
-            mrzInfo.documentNumber.log("nfc_passport 7")
-            mrzInfo.personalNumber.log("nfc_passport 7")
-            mrzInfo.nationality.log("nfc_passport 7")
-            mrzInfo.secondaryIdentifier.replace("<", " ").trim { it <= ' ' }.log("nfc_passport 7")
-            mrzInfo.primaryIdentifier.replace("<", " ").trim { it <= ' ' }.log("nfc_passport 7")
 
+            val passportDetail = mrzInfo.toPassportDetail()
 
             val dg2In = service.getInputStream(PassportService.EF_DG2)
             val dg2File = DG2File(dg2In)
@@ -164,15 +167,39 @@ class NFCReaderActivity : AppCompatActivity() {
             }
             if (!allFaceImageInfos.isEmpty()) {
                 val faceImageInfo = allFaceImageInfos.iterator().next()
-                val image: Image = ImageUtil.getImage(this , faceImageInfo)
-                binding.image.setImageBitmap(image.bitmapImage)
+                val image: Image = ImageUtil.getImage(this, faceImageInfo)
+               // passportDetail.imageBitmap = image.bitmapImage
+                BitmapUtils.bitmapToFile(this, image.bitmapImage) { fileAddress ->
+                    passportDetail.imageURI = fileAddress
+                }
             }
 
+            showData(passportDetail)
 
         } catch (e: Exception) {
-            e.toString().log("nfc_passport 999")
+            e.message.toast(this)
         }
 
+    }
+
+    private fun showData(data: PassportDetailsEntity) {
+        binding.detailsList.adapter = DetailsAdapter(data.toList())
+
+        Glide
+            .with(this)
+            .load(data.imageURI)
+            .into(   binding.image)
+
+        binding.guidContainer.gone()
+        binding.resultContainer.visible()
+        binding.nextBtn.visible()
+
+        binding.nextBtn.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra(KYC.RESULTS, data)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 
 

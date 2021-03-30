@@ -1,4 +1,4 @@
-package com.lib.ekyc.presentation.ui
+package com.lib.ekyc.presentation.ui.document
 
 import android.Manifest
 import android.app.Activity
@@ -10,18 +10,23 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.google.mlkit.vision.text.Text
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
+import com.lib.ekyc.presentation.ui.nfc.GetDataForNFCEncryptionActivity
 import com.lib.ekyc.presentation.utils.*
-import com.lib.ekyc.presentation.utils.KYC.Companion.DETECTION_TYPE
-import com.lib.ekyc.presentation.utils.KYC.Companion.MANDATORY_LIST
-import com.lib.ekyc.presentation.utils.KYC.Companion.RESULTS
-import com.lib.ekyc.presentation.utils.KYC.Companion.SCAN_DOCUMENT_REQUEST_CODE
-import com.lib.ekyc.presentation.utils.KYC.Companion.SCAN_DOCUMENT_RESULTS_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.base.BaseActivity
+import com.lib.ekyc.presentation.utils.base.DetectionType
+import com.lib.ekyc.presentation.utils.base.KYC
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.DETECTION_TYPE
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.MANDATORY_LIST
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_RESULTS_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE
+import com.lib.ekyc.presentation.utils.base.PERMISSION_RESULT
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.DocumentExtractHandler
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.EkycTextRecognitionProcessor
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
 import java.io.File
-
 
 class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
 
@@ -120,8 +125,7 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
     override fun onExtractionSuccess(image: Bitmap, visionText: Text) {
         outPutResult = visionText.text
 
-
-        when (detectionType) {
+     when (detectionType) {
             DetectionType.FACE -> TODO()
             DetectionType.DOCUMENT -> {
                 val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
@@ -131,7 +135,10 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
                 startActivityForResult(anotherIntent, SCAN_DOCUMENT_RESULTS_REQUEST_CODE)
             }
             DetectionType.DOCUMENT_NFC -> {
-                startActivity(Intent(this, NFCReaderActivity::class.java))
+                val anotherIntent = Intent(this, GetDataForNFCEncryptionActivity::class.java)
+                anotherIntent.putExtra(KYC.IMAGE_URL, getFilePath())
+                anotherIntent.putExtra(RESULTS, visionText.text)
+                startActivityForResult(anotherIntent, SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE)
             }
         }
 

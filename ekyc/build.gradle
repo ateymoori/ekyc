@@ -51,6 +51,7 @@ dependencies {
             'com.airbnb.android:lottie:3.6.1',
             'com.github.bumptech.glide:glide:4.12.0',
             'com.karumi:dexter:6.2.2',
+            'com.wdullaer:materialdatetimepicker:4.2.3',
             'com.google.code.gson:gson:2.8.6')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
@@ -66,12 +67,11 @@ dependencies {
             'androidx.test.espresso:espresso-core:3.3.0')
 
 
-
     //NFC
-    api( 'org.jmrtd:jmrtd:0.7.18',
-      'net.sf.scuba:scuba-sc-android:0.0.20',
-      'edu.ucar:jj2000:5.2',
-      'com.github.mhshams:jnbis:1.1.0')
+    api('org.jmrtd:jmrtd:0.7.18',
+            'net.sf.scuba:scuba-sc-android:0.0.20',
+            'edu.ucar:jj2000:5.2',
+            'com.github.mhshams:jnbis:1.1.0')
 
 }
 

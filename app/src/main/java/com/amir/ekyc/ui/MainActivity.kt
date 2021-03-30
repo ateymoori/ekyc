@@ -6,14 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.amir.ekyc.R
-import com.lib.ekyc.presentation.ui.ExtractDocumentActivity
-import com.lib.ekyc.presentation.ui.FaceDetectionActivity
-import com.lib.ekyc.presentation.ui.NFCReaderActivity
-import com.lib.ekyc.presentation.utils.DetectionType
-import com.lib.ekyc.presentation.utils.KYC
-import com.lib.ekyc.presentation.utils.KYC.Companion.FACE_DETECTION_REQUEST_CODE
-import com.lib.ekyc.presentation.utils.KYC.Companion.IMAGE_URL
-import com.lib.ekyc.presentation.utils.KYC.Companion.RESULTS
+import com.lib.ekyc.presentation.ui.document.ExtractDocumentActivity
+import com.lib.ekyc.presentation.ui.nfc.GetDataForNFCEncryptionActivity
+import com.lib.ekyc.presentation.ui.face.FaceDetectionActivity
+import com.lib.ekyc.presentation.utils.base.DetectionType
+import com.lib.ekyc.presentation.utils.base.KYC
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.IMAGE_URL
+import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
 import com.lib.ekyc.presentation.utils.toast
 
 class MainActivity : AppCompatActivity() {
@@ -27,23 +26,22 @@ class MainActivity : AppCompatActivity() {
 //                activity = this,
 //                detectionType = DetectionType.DOCUMENT
 //            )
-//            ExtractDocumentActivity.start(
-//                activity = this,
-//                detectionType = DetectionType.DOCUMENT,
-//                mandatoryFields = arrayListOf("name , family")
-//            )
             ExtractDocumentActivity.start(
                 activity = this,
-                detectionType = DetectionType.DOCUMENT_NFC
+                detectionType = DetectionType.DOCUMENT,
+                mandatoryFields = arrayListOf("name , family")
             )
+
         }
 
         findViewById<View>(R.id.faceDetectionContainer).setOnClickListener {
             FaceDetectionActivity.start(this)
         }
 
-        findViewById<View>(R.id.nfc).setOnClickListener {
-            startActivity(Intent(this, NFCReaderActivity::class.java))
+        findViewById<View>(R.id.nfcContainer).setOnClickListener {
+            GetDataForNFCEncryptionActivity.start(
+                activity = this
+            )
         }
 
     }
@@ -66,6 +64,13 @@ class MainActivity : AppCompatActivity() {
                 val fileAddress = data?.getStringExtra(IMAGE_URL)
                 val results = data?.getStringExtra(RESULTS)
                 "$fileAddress $results".toast(this)
+            }
+        }
+        //NFC extraction
+        if (requestCode == KYC.SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val results = data?.getSerializableExtra(RESULTS)
+                "$results".toast(this)
             }
         }
 

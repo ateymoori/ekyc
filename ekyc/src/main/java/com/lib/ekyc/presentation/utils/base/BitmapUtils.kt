@@ -1,4 +1,4 @@
-package com.lib.ekyc.presentation.utils
+package com.lib.ekyc.presentation.utils.base
 
 import android.content.Context
 import android.content.ContextWrapper
