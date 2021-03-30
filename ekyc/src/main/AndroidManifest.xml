@@ -2,13 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lib.ekyc">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
 
-    <application>
-        <activity
-            android:name=".presentation.ui.ExtractDocumentActivity"
-            android:screenOrientation="portrait" />
+    <uses-permission android:name="android.permission.NFC" />
 
+    <uses-feature android:name="android.hardware.nfc" />
+
+    <application android:name=".presentation.utils.base.MyApplication">
+        <activity android:name=".presentation.ui.nfc.GetDataForNFCEncryptionActivity"></activity>
+        <activity android:name=".presentation.ui.nfc.NFCReaderActivity" />
+        <activity
+            android:name=".presentation.ui.document.ExtractDocumentResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
+        <activity
+            android:name=".presentation.ui.face.FaceDetectionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
+        <activity
+            android:name=".presentation.ui.document.ExtractDocumentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ekyc" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

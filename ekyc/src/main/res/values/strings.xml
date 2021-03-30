@@ -1,1 +1,8 @@
-<resources></resources>
+<resources>
+    <string name="app_name">Ekyc</string>
+    <string name="passport_encryption_keys">Passport Encryption Keys</string>
+    <string name="we_need_these_data_to_encrypt_your_passport_details">We need these data to encrypt your passport details.</string>
+    <string name="passport_expiry">Passport expiry</string>
+    <string name="birthday">Birthday</string>
+    <string name="passport_number">Passport number</string>
+</resources>
