@@ -5,4 +5,5 @@
     <string name="passport_expiry">Passport expiry</string>
     <string name="birthday">Birthday</string>
     <string name="passport_number">Passport number</string>
+    <string name="please_keep_your_phone_close_to_your_passport_and_wait_at_least_10_seconds">Please keep your phone close to your passport and wait at least 10 seconds.</string>
 </resources>

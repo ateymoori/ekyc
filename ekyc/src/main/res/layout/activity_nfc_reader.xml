@@ -98,7 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:gravity="center"
-                    android:text="Please keep your phone close to your passport and wait at least 10 seconds."
+                    android:textSize="16sp"
+                    android:text="@string/please_keep_your_phone_close_to_your_passport_and_wait_at_least_10_seconds"
                     android:textColor="@color/darkGrayBG" />
             </LinearLayout>
 

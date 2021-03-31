@@ -14,6 +14,16 @@ I've separated it into 3 major fanctionality
 #### 3- Extract Passport details by NFC tag
     - Extract and Decrypt Passport details by NFC tag
 <br><br>
+ [![IMAGE ALT TEXT HERE](http://i3.ytimg.com/vi/HEFzfg3Fzj8/hqdefault.jpg)](https://www.youtube.com/watch?v=HEFzfg3Fzj8)
+ <br>
+ <iframe width="400" height="800"
+src="https://www.youtube.com/embed/HEFzfg3Fzj8" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+
+<br><br>
 ### Technologies
 Full Kotlin
 ML KIT
@@ -23,20 +33,19 @@ Junit/Espresso
  
  ### Usage
  1- Add EKYC library to your project
- 2- for Extract simple documents :
+ 
+ 2- For Extract simple documents :
 
 ```java
 ExtractDocumentActivity.start(
-    activity = this,
-    detectionType = DetectionType.DOCUMENT
+    activity = this
 )
 ```
- 3- for Extract documents with mandatory fields :
+ 3- For Extract documents with mandatory fields :
 
 ```java
 ExtractDocumentActivity.start(
-    activity = this,
-    detectionType = DetectionType.DOCUMENT,
+    activity = this
     mandatoryFields = arrayListOf("name , family")
 )
 ```

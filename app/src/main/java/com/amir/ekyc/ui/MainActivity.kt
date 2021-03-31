@@ -9,7 +9,6 @@ import com.amir.ekyc.R
 import com.lib.ekyc.presentation.ui.document.ExtractDocumentActivity
 import com.lib.ekyc.presentation.ui.nfc.GetDataForNFCEncryptionActivity
 import com.lib.ekyc.presentation.ui.face.FaceDetectionActivity
-import com.lib.ekyc.presentation.utils.base.DetectionType
 import com.lib.ekyc.presentation.utils.base.KYC
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.IMAGE_URL
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
@@ -23,14 +22,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.extractDocumentContainer).setOnClickListener {
 
             ExtractDocumentActivity.start(
-                activity = this,
-                detectionType = DetectionType.DOCUMENT
+                activity = this
             )
-            ExtractDocumentActivity.start(
-                activity = this,
-                detectionType = DetectionType.DOCUMENT,
-                mandatoryFields = arrayListOf("name , family")
-            )
+//            ExtractDocumentActivity.start(
+//                activity = this,
+//                mandatoryFields = arrayListOf("name , family")
+//            )
 
         }
 

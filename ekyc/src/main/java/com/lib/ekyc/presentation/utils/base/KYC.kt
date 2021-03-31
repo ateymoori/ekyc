@@ -10,9 +10,6 @@ class KYC {
         const val IMAGE_URL = "image_url"
         const val MANDATORY_LIST = "mandatory_list"
         const val RESULTS = "results"
-        const val DETECTION_TYPE = "detectionType"
-
-
         const val PASSPORT_NUMBER = "PASSPORT_NUMBER"
         const val EXPIRY = "EXPIRY"
         const val BIRTHDATE = "BIRTHDATE"

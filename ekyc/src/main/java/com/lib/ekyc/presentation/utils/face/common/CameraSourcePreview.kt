@@ -21,7 +21,6 @@ class CameraSourcePreview(context: Context, attrs: AttributeSet?) :
     private var surfaceAvailable = false
     private var cameraSource: CameraSource? = null
     private var overlay: GraphicOverlay? = null
-    var displayMetrics = DisplayMetrics()
 
     @Throws(IOException::class)
     fun start(cameraSource: CameraSource?) {
@@ -95,7 +94,7 @@ class CameraSourcePreview(context: Context, attrs: AttributeSet?) :
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         var width = 320
-        var height = 240
+        var height = 320
         if (cameraSource != null) {
             val size = cameraSource!!.previewSize
             if (size != null) {
@@ -123,6 +122,9 @@ class CameraSourcePreview(context: Context, attrs: AttributeSet?) :
             childHeight = layoutHeight
             childWidth = (layoutHeight.toFloat() / height.toFloat() * width).toInt()
         }
+
+        childHeight += 100
+
         for (i in 0 until childCount) {
             getChildAt(i).layout(0, 0, childWidth, childHeight)
             Log.d(TAG, "Assigned view: $i")

@@ -10,17 +10,13 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.google.mlkit.vision.text.Text
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
-import com.lib.ekyc.presentation.ui.nfc.GetDataForNFCEncryptionActivity
 import com.lib.ekyc.presentation.utils.*
 import com.lib.ekyc.presentation.utils.base.BaseActivity
-import com.lib.ekyc.presentation.utils.base.DetectionType
 import com.lib.ekyc.presentation.utils.base.KYC
-import com.lib.ekyc.presentation.utils.base.KYC.Companion.DETECTION_TYPE
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.MANDATORY_LIST
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_REQUEST_CODE
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_RESULTS_REQUEST_CODE
-import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE
 import com.lib.ekyc.presentation.utils.base.PERMISSION_RESULT
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.DocumentExtractHandler
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.EkycTextRecognitionProcessor
@@ -35,17 +31,14 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
     private var fileName: Long? = null
     private lateinit var image: Bitmap
     private lateinit var outPutResult: String
-    private lateinit var detectionType: DetectionType
 
     companion object {
         fun start(
             activity: Activity,
-            detectionType: DetectionType,
             mandatoryFields: ArrayList<String>? = null
         ) {
             val starter = Intent(activity, ExtractDocumentActivity::class.java)
             starter.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
-            starter.putExtra(DETECTION_TYPE, detectionType.ordinal)
             activity.startActivityForResult(starter, SCAN_DOCUMENT_REQUEST_CODE)
         }
     }
@@ -57,11 +50,6 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         setContentView(view)
 
         mandatoryFields = intent.getStringArrayListExtra(MANDATORY_LIST)
-        detectionType = DetectionType.values()[intent.getIntExtra(
-            DETECTION_TYPE,
-            DetectionType.DOCUMENT.ordinal
-        )]
-
         checkPermission(
             Manifest.permission.CAMERA
         ) { result ->
@@ -124,23 +112,12 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
 
     override fun onExtractionSuccess(image: Bitmap, visionText: Text) {
         outPutResult = visionText.text
+        val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
+        anotherIntent.putExtra(KYC.IMAGE_URL, getFilePath())
+        anotherIntent.putExtra(RESULTS, visionText.text)
+        anotherIntent.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
+        startActivityForResult(anotherIntent, SCAN_DOCUMENT_RESULTS_REQUEST_CODE)
 
-     when (detectionType) {
-            DetectionType.FACE -> TODO()
-            DetectionType.DOCUMENT -> {
-                val anotherIntent = Intent(this, ExtractDocumentResultActivity::class.java)
-                anotherIntent.putExtra(KYC.IMAGE_URL, getFilePath())
-                anotherIntent.putExtra(RESULTS, visionText.text)
-                anotherIntent.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
-                startActivityForResult(anotherIntent, SCAN_DOCUMENT_RESULTS_REQUEST_CODE)
-            }
-            DetectionType.DOCUMENT_NFC -> {
-                val anotherIntent = Intent(this, GetDataForNFCEncryptionActivity::class.java)
-                anotherIntent.putExtra(KYC.IMAGE_URL, getFilePath())
-                anotherIntent.putExtra(RESULTS, visionText.text)
-                startActivityForResult(anotherIntent, SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE)
-            }
-        }
 
 
     }
