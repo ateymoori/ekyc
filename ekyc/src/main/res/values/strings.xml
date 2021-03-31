@@ -6,4 +6,10 @@
     <string name="birthday">Birthday</string>
     <string name="passport_number">Passport number</string>
     <string name="please_keep_your_phone_close_to_your_passport_and_wait_at_least_10_seconds">Please keep your phone close to your passport and wait at least 10 seconds.</string>
+    <string name="cannot_detect_face">Cannot detect face</string>
+    <string name="face_empty">Face is Empty</string>
+    <string name="your_face_detected">Your face detected successfully</string>
+    <string name="face_is_not_in_area">Face is not in correct area</string>
+    <string name="more_than_one_face_detected">More than one face are in the screen</string>
+    <string name="need_permission">Need permission, Please assign Camera permission from Settings/App</string>
 </resources>

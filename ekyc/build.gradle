@@ -33,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -64,15 +69,15 @@ dependencies {
 
     androidTestImplementation('junit:junit:4.+',
             'androidx.test.ext:junit:1.1.2',
-            'androidx.test.espresso:espresso-core:3.3.0')
-
+            'androidx.test.espresso:espresso-core:3.3.0',
+            'androidx.test.espresso:espresso-intents:3.3.0'
+    )
 
     //NFC
     api('org.jmrtd:jmrtd:0.7.18',
             'net.sf.scuba:scuba-sc-android:0.0.20',
             'edu.ucar:jj2000:5.2',
             'com.github.mhshams:jnbis:1.1.0')
-
 
 
     def test_version = '1.3.0'
@@ -85,6 +90,7 @@ dependencies {
     androidTestImplementation "io.mockk:mockk-android:1.9.3.kotlin12"
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+
 
 }
 

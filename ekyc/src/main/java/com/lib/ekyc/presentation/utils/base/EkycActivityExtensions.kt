@@ -42,20 +42,6 @@ fun String?.bodyOrNull(): String {
         this
 }
 
-fun Activity.snackBar(text: String?) {
-    text?.let {
-        val snackBar = Snackbar.make(this.window.decorView.rootView, text, Snackbar.LENGTH_LONG)
-        val view = snackBar.view
-        val params = FrameLayout.LayoutParams(view.layoutParams)
-        params.gravity = Gravity.TOP
-        params.topMargin = 86.dpToPx()
-        view.layoutParams = params
-        snackBar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
-        snackBar.setBackgroundTint(Color.RED)
-        snackBar.show()
-    }
-}
-
 fun Activity.shortToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }

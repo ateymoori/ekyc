@@ -1,5 +1,6 @@
 package com.lib.ekyc.presentation.ui.face
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -7,17 +8,20 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
+import com.lib.ekyc.R
 import com.lib.ekyc.databinding.ActivityFaceDetectionBinding
 import com.lib.ekyc.presentation.utils.*
+import com.lib.ekyc.presentation.utils.base.BaseActivity
 import com.lib.ekyc.presentation.utils.base.BitmapUtils
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.FACE_DETECTION_REQUEST_CODE
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.IMAGE_URL
+import com.lib.ekyc.presentation.utils.base.PERMISSION_RESULT
 import com.lib.ekyc.presentation.utils.face.common.*
 import com.lib.ekyc.presentation.utils.face.interfaces.FaceDetectStatus
 import com.lib.ekyc.presentation.utils.face.interfaces.FrameReturn
 import com.lib.ekyc.presentation.utils.face.visions.FaceDetectionProcessor
 
-class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus {
+class FaceDetectionActivity : BaseActivity(), FrameReturn, FaceDetectStatus {
 
     private lateinit var binding: ActivityFaceDetectionBinding
     private var cameraSource: CameraSource? = null
@@ -39,8 +43,22 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
         val view = binding.root
         setContentView(view)
 
-        cameraSource = CameraSource(this, binding.faceOverlay)
+        checkPermission(
+            Manifest.permission.CAMERA
+        ) { result ->
+            when (result) {
+                PERMISSION_RESULT.GRANTED -> startProcess()
+                else -> {
+                    showError(getString(R.string.need_permission))
+                    finish()
+                }
+            }
+        }
+    }
 
+
+    private fun startProcess() {
+        cameraSource = CameraSource(this, binding.faceOverlay)
         try {
             val processor = FaceDetectionProcessor(resources)
             processor.frameHandler = this
@@ -52,23 +70,21 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
 
         binding.captureBtn.setOnClickListener {
             if (!faceIsOK) {
-                "Cannot detect face".toast(this)
+                getString(R.string.cannot_detect_face).toast(this)
                 return@setOnClickListener
             }
             if (faceImage == null) {
-                "Face is Empty".toast(this)
+                getString(R.string.face_empty).toast(this)
                 return@setOnClickListener
             }
             binding.preview.setImageBitmap(faceImage)
-            BitmapUtils.bitmapToFile(this ,faceImage) { fileAddress ->
+            BitmapUtils.bitmapToFile(this, faceImage) { fileAddress ->
                 val resultIntent = Intent()
                 resultIntent.putExtra(IMAGE_URL, fileAddress)
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
             }
-
         }
-
     }
 
     private fun startCamera() {
@@ -76,7 +92,6 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
             binding.camera.start(cameraSource, binding.faceOverlay)
         }
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -103,19 +118,19 @@ class FaceDetectionActivity : AppCompatActivity(), FrameReturn, FaceDetectStatus
     }
 
     override fun onFaceLocated(rectModel: RectModel?) {
-        showSuccessMessage("Your face detected successfully")
+        showSuccessMessage(getString(R.string.your_face_detected))
         binding.captureBtn.visible()
         faceIsOK = true
 
     }
 
     override fun onFaceNotLocated() {
-        showErrorMessage("Face is not in correct area")
+        showErrorMessage(getString(R.string.face_is_not_in_area))
         faceIsOK = false
     }
 
     override fun onMultiFaceLocated() {
-        showErrorMessage("More than one face are in the screen")
+        showErrorMessage(getString(R.string.more_than_one_face_detected))
         faceIsOK = false
     }
 

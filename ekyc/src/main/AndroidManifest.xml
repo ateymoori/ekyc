@@ -10,8 +10,12 @@
 
     <uses-feature android:name="android.hardware.nfc" />
 
-    <application android:name=".presentation.utils.base.MyApplication">
-        <activity android:name=".presentation.ui.nfc.GetDataForNFCEncryptionActivity"></activity>
+    <application
+        android:name=".presentation.utils.base.MyApplication"
+        android:theme="@style/Theme.Ekyc">
+
+
+        <activity android:name=".presentation.ui.nfc.GetDataForNFCEncryptionActivity" />
         <activity android:name=".presentation.ui.nfc.NFCReaderActivity" />
         <activity
             android:name=".presentation.ui.document.ExtractDocumentResultActivity"

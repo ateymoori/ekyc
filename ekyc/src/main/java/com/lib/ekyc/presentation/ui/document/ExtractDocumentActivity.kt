@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.google.mlkit.vision.text.Text
+import com.lib.ekyc.R
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
 import com.lib.ekyc.presentation.utils.*
 import com.lib.ekyc.presentation.utils.base.BaseActivity
@@ -55,7 +56,7 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         ) { result ->
             when (result) {
                 PERMISSION_RESULT.GRANTED -> startCamera()
-                else -> showError("Need permission")
+                else -> showError(getString(R.string.need_permission))
             }
         }
 
@@ -117,9 +118,6 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         anotherIntent.putExtra(RESULTS, visionText.text)
         anotherIntent.putStringArrayListExtra(MANDATORY_LIST, mandatoryFields)
         startActivityForResult(anotherIntent, SCAN_DOCUMENT_RESULTS_REQUEST_CODE)
-
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lib.ekyc.databinding.ActivityGetDataForNfcEncryptionBinding
 import com.lib.ekyc.presentation.utils.base.AppUtil
+import com.lib.ekyc.presentation.utils.base.DocumentValidationUtil
 import com.lib.ekyc.presentation.utils.base.KYC
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
@@ -56,13 +57,34 @@ class GetDataForNFCEncryptionActivity : AppCompatActivity(), DatePickerDialog.On
         }
 
         binding.nextBtn.setOnClickListener {
-            val anotherIntent = Intent(this, NFCReaderActivity::class.java)
-            anotherIntent.putExtra(KYC.PASSPORT_NUMBER, binding.passportNumber.text.toString())
-            anotherIntent.putExtra(KYC.EXPIRY, binding.expiry.text.toString())
-            anotherIntent.putExtra(KYC.BIRTHDATE, binding.birthday.text.toString())
-            startActivityForResult(anotherIntent, KYC.SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE)
+            validateAndProcess(
+                pan = binding.passportNumber.text.toString(),
+                expiry = binding.expiry.text.toString(),
+                birthDate = binding.birthday.text.toString()
+            )
+        }
+    }
+
+    private fun validateAndProcess(pan: String?, expiry: String?, birthDate: String?) {
+        if (!DocumentValidationUtil.passportNumberIsValid(pan)) {
+            binding.passportNumber.error = "Passport number is invalid"
+            return
         }
 
+        if (expiry.isNullOrEmpty()) {
+            binding.expiry.error = "This fields is mandatory"
+            return
+        }
+        if (birthDate.isNullOrEmpty()) {
+            binding.birthday.error = "This fields is mandatory"
+            return
+        }
+
+        val anotherIntent = Intent(this, NFCReaderActivity::class.java)
+        anotherIntent.putExtra(KYC.PASSPORT_NUMBER, pan)
+        anotherIntent.putExtra(KYC.EXPIRY, expiry)
+        anotherIntent.putExtra(KYC.BIRTHDATE, birthDate)
+        startActivityForResult(anotherIntent, KYC.SCAN_PASSPORT_NFC_RESULTS_REQUEST_CODE)
     }
 
     private fun showDatePicker(tag: String) {
