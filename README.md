@@ -1,10 +1,29 @@
+
 # Android KYC SDK, Read and Extract Documents, Face Detection and Extract Passport by NFC tag
 
- 
 
 ### This is an SDK to determine how to Extract document details by ML kit, Detect and extract Face by camera and How to extract and decrypt Passport details by NFC tag
+<br>
+ <iframe width="400" height="800"
+src="https://www.youtube.com/embed/x1BGmbAZ-iw" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe> <iframe width="400" height="800"
+src="https://www.youtube.com/embed/SdR3FgrJIkY" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe><iframe width="400" height="800"
+src="https://www.youtube.com/embed/fJuPQFidiXs" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
 <br><br>
-I've separated it into 3 major fanctionality
+
+[Download Sample APK](https://parkup.app/website/screens/ekyc.apk)
+
+<br>
+
+I've separated it into 3 major functionality
 #### 1- Face Detection by ML Kit
     - Extract Face by front camera
     - Check if just one face exists in the frame and it is in the correct area
@@ -14,16 +33,7 @@ I've separated it into 3 major fanctionality
 #### 3- Extract Passport details by NFC tag
     - Extract and Decrypt Passport details by NFC tag
 <br><br>
- [![IMAGE ALT TEXT HERE](http://i3.ytimg.com/vi/HEFzfg3Fzj8/hqdefault.jpg)](https://www.youtube.com/watch?v=HEFzfg3Fzj8)
- <br>
- <iframe width="400" height="800"
-src="https://www.youtube.com/embed/HEFzfg3Fzj8" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
 
-
-<br><br>
 ### Technologies
 Full Kotlin
 ML KIT
@@ -91,7 +101,13 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 ```
  
-<br><br><br>
+<br><br>
+### TEST/CI CD
+Also I'm using GitHub Actions as CI/CD. As I defined before, If I push the codes into any branch except master/release, All tests will run, Then If all of them passed, one APK will be built and uploads into the Github actions artifact.
+
+<img src="https://parkup.app/website/screens/8.png" alt="Android Architecture " width=530 /> <img src="https://parkup.app/website/screens/9.png" alt="Android Architecture " width=450 />
+
+<br><br>
 
 ----------------------------
 AmirHossein Teymoori

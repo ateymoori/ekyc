@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
 import com.lib.ekyc.R
 import com.lib.ekyc.databinding.ActivityFaceDetectionBinding
@@ -58,6 +57,8 @@ class FaceDetectionActivity : BaseActivity(), FrameReturn, FaceDetectStatus {
 
 
     private fun startProcess() {
+        showErrorMessage(getString(R.string.face_empty))
+
         cameraSource = CameraSource(this, binding.faceOverlay)
         try {
             val processor = FaceDetectionProcessor(resources)
@@ -144,11 +145,15 @@ class FaceDetectionActivity : BaseActivity(), FrameReturn, FaceDetectStatus {
         binding.message.text = msg
     }
 
-    private fun showErrorMessage(msg: String) {
+    private fun showErrorMessage(msg: String?) {
         binding.message.setTextColor(Color.RED)
         binding.message.text = msg
         binding.captureBtn.invisible()
     }
 
+    override fun showError(msg: String?) {
+        super.showError(msg)
+        showErrorMessage(msg)
+    }
 
 }

@@ -91,7 +91,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:padding="12dp"
-            android:text="Make sure just your face is in the center of screen."
+            android:text="@string/make_sure_your_face"
             android:textColor="#fff"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/captureBtn"

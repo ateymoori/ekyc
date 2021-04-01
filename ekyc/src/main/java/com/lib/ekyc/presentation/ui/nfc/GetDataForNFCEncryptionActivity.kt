@@ -17,9 +17,9 @@ class GetDataForNFCEncryptionActivity : AppCompatActivity(), DatePickerDialog.On
     lateinit var datePicker: DatePickerDialog
     private lateinit var binding: ActivityGetDataForNfcEncryptionBinding
 
-    var passportNumber = "N46409799"
-    var expirationDate = "230902"
-    var birthDate = "890703"
+    var passportNumber = ""
+    var expirationDate = ""
+    var birthDate = ""
 
     companion object {
         fun start(
