@@ -4,6 +4,8 @@
 
 ### This is an SDK to determine how to Extract document details by ML kit, Detect and extract Face by camera and How to extract and decrypt Passport details by NFC tag
 <br>
+<img src="https://parkup.app/website/screens/dashboard.png" width="350" height="700">
+<br>
 
 ### ٰDemo Videos : 
 [<img src="https://parkup.app/website/screens/youtube_face.png" width="250" height="500">](https://www.youtube.com/watch?v=SdR3FgrJIkY)
@@ -28,10 +30,10 @@ I've separated it into 3 major functionality
 <br><br>
 
 ### Technologies
-Full Kotlin
-ML KIT
-Camera
-NFC reader
+Full Kotlin, 
+ML KIT, 
+Camera, 
+NFC reader, 
 Junit/Espresso
  
  ### Usage
