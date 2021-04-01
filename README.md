@@ -4,19 +4,12 @@
 
 ### This is an SDK to determine how to Extract document details by ML kit, Detect and extract Face by camera and How to extract and decrypt Passport details by NFC tag
 <br>
- <iframe width="400" height="800"
-src="https://www.youtube.com/embed/x1BGmbAZ-iw" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe> <iframe width="400" height="800"
-src="https://www.youtube.com/embed/SdR3FgrJIkY" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe><iframe width="400" height="800"
-src="https://www.youtube.com/embed/fJuPQFidiXs" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+
+### ٰDemo Videos : 
+[<img src="https://parkup.app/website/screens/youtube_face.png" width="300">](https://www.youtube.com/watch?v=SdR3FgrJIkY)
+[<img src="https://parkup.app/website/screens/youtube_document.png" width="300">](https://www.youtube.com/watch?v=x1BGmbAZ-iw) 
+[<img src="https://parkup.app/website/screens/youtube_nfc.png" width="300">](https://www.youtube.com/watch?v=fJuPQFidiXs) 
+
 <br><br>
 
 [Download Sample APK](https://parkup.app/website/screens/ekyc.apk)
