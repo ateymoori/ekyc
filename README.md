@@ -1,10 +1,22 @@
+
 # Android KYC SDK, Read and Extract Documents, Face Detection and Extract Passport by NFC tag
 
- 
 
 ### This is an SDK to determine how to Extract document details by ML kit, Detect and extract Face by camera and How to extract and decrypt Passport details by NFC tag
+<br>
+
+### ٰDemo Videos : 
+[<img src="https://parkup.app/website/screens/youtube_face.png" width="250" height="500">](https://www.youtube.com/watch?v=SdR3FgrJIkY)
+[<img src="https://parkup.app/website/screens/youtube_document.png" width="250" height="500">](https://www.youtube.com/watch?v=x1BGmbAZ-iw) 
+[<img src="https://parkup.app/website/screens/youtube_nfc.png" width="250" height="500">](https://www.youtube.com/watch?v=fJuPQFidiXs) 
+
 <br><br>
-I've separated it into 3 major fanctionality
+
+[Download Sample APK](https://parkup.app/website/screens/ekyc.apk)
+
+<br>
+
+I've separated it into 3 major functionality
 #### 1- Face Detection by ML Kit
     - Extract Face by front camera
     - Check if just one face exists in the frame and it is in the correct area
@@ -14,6 +26,7 @@ I've separated it into 3 major fanctionality
 #### 3- Extract Passport details by NFC tag
     - Extract and Decrypt Passport details by NFC tag
 <br><br>
+
 ### Technologies
 Full Kotlin
 ML KIT
@@ -23,20 +36,19 @@ Junit/Espresso
  
  ### Usage
  1- Add EKYC library to your project
- 2- for Extract simple documents :
+ 
+ 2- For Extract simple documents :
 
 ```java
 ExtractDocumentActivity.start(
-    activity = this,
-    detectionType = DetectionType.DOCUMENT
+    activity = this
 )
 ```
- 3- for Extract documents with mandatory fields :
+ 3- For Extract documents with mandatory fields :
 
 ```java
 ExtractDocumentActivity.start(
-    activity = this,
-    detectionType = DetectionType.DOCUMENT,
+    activity = this
     mandatoryFields = arrayListOf("name , family")
 )
 ```
@@ -82,7 +94,13 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 ```
  
-<br><br><br>
+<br><br>
+### TEST/CI CD
+Also I'm using GitHub Actions as CI/CD. As I defined before, If I push the codes into any branch except master/release, All tests will run, Then If all of them passed, one APK will be built and uploads into the Github actions artifact.
+
+<img src="https://parkup.app/website/screens/8.png" alt="Android Architecture " width=530 /> <img src="https://parkup.app/website/screens/9.png" alt="Android Architecture " width=450 />
+
+<br><br>
 
 ----------------------------
 AmirHossein Teymoori

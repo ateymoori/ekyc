@@ -19,7 +19,7 @@
     </style>
 
 
-    <style name="InputTypeStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="InputTypeStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textSize">11sp</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="boxStrokeWidthFocused">1dp</item>

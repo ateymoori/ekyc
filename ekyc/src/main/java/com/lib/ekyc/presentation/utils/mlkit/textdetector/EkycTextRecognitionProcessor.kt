@@ -9,7 +9,7 @@ import java.util.ArrayList
 class EkycTextRecognitionProcessor(
     private val bitmap: Bitmap,
     private val mandatoryFields: ArrayList<String>?,
-    private val handler: DocumentExtractHandler
+    private val handler: DocumentExtractHandler?
 ) {
 
     init {
@@ -25,7 +25,7 @@ class EkycTextRecognitionProcessor(
                 processResult(bitmap, visionText)
             }
             .addOnFailureListener {
-                handler.onExtractionFailed(bitmap, it.message)
+                handler?.onExtractionFailed(bitmap, it.message)
             }
     }
 
@@ -46,9 +46,9 @@ class EkycTextRecognitionProcessor(
         }
 
         if (!error.isNullOrEmpty()) {
-            handler.onExtractionFailed(bitmap, error)
+            handler?.onExtractionFailed(bitmap, error)
         } else {
-            handler.onExtractionSuccess(bitmap, visionText)
+            handler?.onExtractionSuccess(bitmap, visionText)
         }
 
 

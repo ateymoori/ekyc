@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Ekyc</string>
+    <string name="kyc_sample_app">KYC Sample APP</string>
+    <string name="proof_of_identify">Proof of identify</string>
+    <string name="in_order_to_completed_your_registration_please_upload_a_copy_of_your_identity_with_a_clear_selfie_photo_to_proof_the_document_holder">In order to completed your registration Please upload a copy of your identity with A clear selfie photo to proof the document holder.</string>
+    <string name="extract_document">Extract Document</string>
+    <string name="we_accept_only">We accept only</string>
+    <string name="id_card_passport_driving_licence">ID card, Passport, Driving licence</string>
+    <string name="passport_by_nfc">Passport by NFC</string>
+    <string name="scan_passport_by_nfc">Scan passport by NFC</string>
+    <string name="scan_passport_tag_by_nfc_reader">Scan Passport tag by NFC reader</string>
+    <string name="face_detection">Face detection</string>
+    <string name="take_a_selfie">Take a selfie</string>
+    <string name="make_sure_your_face_is_clear">Make sure your face is clear.</string>
 </resources>
