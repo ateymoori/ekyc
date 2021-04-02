@@ -71,3 +71,17 @@ fun Int.fixZero(): String {
 }
 
 operator fun ViewGroup.get(position: Int): View? = getChildAt(position)
+
+
+val String?.containsDigit: Boolean
+    get() = this?.matches(Regex(".*[0-9].*")) ?: false
+
+val String?.containsCapitalLetter: Boolean
+    get() = this?.matches(Regex(".*[A-Z].*")) ?: false
+
+val String?.containsDigitsAndLetter: Boolean
+    get() = this?.matches(Regex("[A-Za-z0-9]")) ?: false
+
+val String?.containsLatinLetter: Boolean
+    get() = (this?.matches(Regex(".*[A-Za-z].*"))) ?: false
+
