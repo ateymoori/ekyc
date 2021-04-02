@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lib.ekyc.databinding.ActivityGetDataForNfcEncryptionBinding
-import com.lib.ekyc.presentation.utils.base.AppUtil
+import com.lib.ekyc.presentation.utils.base.DateUtil
 import com.lib.ekyc.presentation.utils.base.DocumentValidationUtil
 import com.lib.ekyc.presentation.utils.base.KYC
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
@@ -93,7 +93,7 @@ class GetDataForNFCEncryptionActivity : AppCompatActivity(), DatePickerDialog.On
     }
 
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val date = AppUtil.convertDate(year, monthOfYear + 1, dayOfMonth)
+        val date = DateUtil.convertDate(year, monthOfYear + 1, dayOfMonth)
         when (view?.tag) {
             DATETYPE.BIRTHDATE.name -> {
                 binding.birthday.setText(date)
