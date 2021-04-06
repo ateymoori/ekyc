@@ -7,7 +7,6 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 
-
 class BitmapUtils {
 
     companion object {
