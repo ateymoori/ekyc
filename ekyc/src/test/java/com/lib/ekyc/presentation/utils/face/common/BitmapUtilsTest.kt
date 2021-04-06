@@ -11,7 +11,7 @@ class BitmapUtilsTest {
     fun `getBitmap_should_return_bitmap`() {
         val byteBuffers = mock(ByteBuffer::class.java)
         val frameData = mock(FrameMetaData::class.java)
-        val outPut = BitmapUtils.getBitmap(byteBuffers, frameData)
+          BitmapUtils.getBitmap(byteBuffers, frameData)
     }
 
 }
