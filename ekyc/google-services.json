@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "278814403670",
+    "firebase_url": "https://linear-skill-254908.firebaseio.com",
+    "project_id": "linear-skill-254908",
+    "storage_bucket": "linear-skill-254908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278814403670:android:67ca788345f1c923121ff7",
+        "android_client_info": {
+          "package_name": "com.lib.ekyc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278814403670-m3257lqhkt41u3fls9vnjaggc1biuuan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOZ_eS2aMcEXjxX75ebgNRSGm8MfW16cQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278814403670-m3257lqhkt41u3fls9vnjaggc1biuuan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

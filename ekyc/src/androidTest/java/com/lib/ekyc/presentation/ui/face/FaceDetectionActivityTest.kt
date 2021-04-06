@@ -21,10 +21,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class FaceDetectionActivityTest {
 
-
     @Before
     fun grantPhonePermission() {
-        // In M+, trying to call a number will trigger a runtime dialog. Make sure
         // the permission is granted before running this test.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getInstrumentation().getUiAutomation().executeShellCommand(
@@ -34,9 +32,6 @@ class FaceDetectionActivityTest {
         }
     }
 
-    @Before
-    fun init() {
-    }
 
     @Test
     fun PERMISSION_GRANTED_FIREBASE_OK_SHOULD_GET_OK_WITH_FACE_EMPTY_MSG() {

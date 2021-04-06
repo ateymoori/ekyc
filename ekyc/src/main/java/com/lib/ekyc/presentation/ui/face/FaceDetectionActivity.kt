@@ -55,7 +55,6 @@ class FaceDetectionActivity : BaseActivity(), FrameReturn, FaceDetectStatus {
         }
     }
 
-
     private fun startProcess() {
         showErrorMessage(getString(R.string.face_empty))
 

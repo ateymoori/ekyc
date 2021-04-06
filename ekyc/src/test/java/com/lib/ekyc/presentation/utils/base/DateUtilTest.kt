@@ -13,7 +13,7 @@ class DateUtilTest {
 
     @Test
     fun `incorrect_date_should_false`() {
-        TestCase.assertEquals("20121" ,DateUtil.convertDate(year = 2020, month = 12, day = 1))
+        TestCase.assertNotSame("20121" ,DateUtil.convertDate(year = 2020, month = 12, day = 1))
     }
 
 }
