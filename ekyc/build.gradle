@@ -42,54 +42,55 @@ android {
 
 dependencies {
 
-    api('androidx.core:core-ktx:1.3.2',
-            'androidx.appcompat:appcompat:1.2.0',
-            'androidx.constraintlayout:constraintlayout:2.0.4',
-            'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31',
-            'com.google.android.material:material:1.3.0',
-            'androidx.multidex:multidex:2.0.1',
-            'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
-            'com.github.ybq:Android-SpinKit:1.4.0',
-            'androidx.preference:preference-ktx:1.1.1',
-            'androidx.navigation:navigation-fragment-ktx:2.3.3',
-            'androidx.navigation:navigation-ui-ktx:2.3.3',
-            'com.airbnb.android:lottie:3.6.1',
-            'com.github.bumptech.glide:glide:4.12.0',
-            'com.karumi:dexter:6.2.2',
-            'com.wdullaer:materialdatetimepicker:4.2.3',
-            'com.google.code.gson:gson:2.8.6')
+    //General APIs
+    api 'androidx.multidex:multidex:2.0.1'
+    api 'androidx.appcompat:appcompat:1.3.1'
 
-    //ML Kit
-    api('com.google.android.gms:play-services-mlkit-text-recognition:16.1.3',
-            'com.google.firebase:firebase-ml-vision:24.0.3',
-            'com.google.android.gms:play-services-mlkit-face-detection:16.1.4',
-            'com.otaliastudios:cameraview:2.6.2',
-            'com.google.guava:guava:30.1-jre')
+    api 'androidx.core:core-ktx:1.6.0'
+    api 'androidx.preference:preference-ktx:1.1.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.1'
+    api 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31'
+    api 'com.google.android.material:material:1.4.0'
+    api 'com.wdullaer:materialdatetimepicker:4.2.3'
+    api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    api 'com.airbnb.android:lottie:3.7.0'
+    api 'com.karumi:dexter:6.2.2'
+    api 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    api 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    //NFC
-    api('org.jmrtd:jmrtd:0.7.18',
-            'net.sf.scuba:scuba-sc-android:0.0.20',
-            'edu.ucar:jj2000:5.2',
-            'com.github.mhshams:jnbis:1.1.0')
+    //Firebase KIT
+    api 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
+    //noinspection OutdatedLibrary
+    api 'com.google.firebase:firebase-ml-vision:24.0.3'
+    api 'com.google.android.gms:play-services-mlkit-face-detection:16.1.4'
+    api 'com.otaliastudios:cameraview:2.6.2'
+    api 'com.google.guava:guava:30.1-jre'
+
+    //PASSPORT NFC READER
+    api 'org.jmrtd:jmrtd:0.7.18'
+    api 'net.sf.scuba:scuba-sc-android:0.0.20'
+    api 'edu.ucar:jj2000:5.2'
+    api 'com.github.mhshams:jnbis:1.1.0'
 
     //TEST
-    androidTestImplementation(
-            'androidx.test.ext:junit:1.1.2',
-            'androidx.test.espresso:espresso-core:3.3.0',
-            'androidx.test.espresso:espresso-intents:3.3.0',
-            'androidx.test:rules:1.3.0',
-            'androidx.test:runner:1.1.1',
-            'androidx.annotation:annotation:1.2.0',
-            'io.mockk:mockk-android:1.9.3.kotlin12',
-            'androidx.arch.core:core-testing:2.1.0')
-    testImplementation('junit:junit:4.13.2',
-            'androidx.test:core:1.3.0',
-            'org.mockito:mockito-inline:2.13.0')
-    api(
-            'org.mockito:mockito-core:2.23.0',
-            'androidx.annotation:annotation:1.2.0'
-    )
+    api 'org.mockito:mockito-core:2.23.0'
+    api 'androidx.annotation:annotation:1.2.0'
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
+    androidTestImplementation 'io.mockk:mockk-android:1.9.3.kotlin12'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

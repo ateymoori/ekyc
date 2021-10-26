@@ -11,14 +11,11 @@ import android.os.Bundle
 import com.google.mlkit.vision.text.Text
 import com.lib.ekyc.R
 import com.lib.ekyc.databinding.ActivityExtractDocumentBinding
-import com.lib.ekyc.presentation.utils.*
-import com.lib.ekyc.presentation.utils.base.BaseActivity
-import com.lib.ekyc.presentation.utils.base.KYC
+import com.lib.ekyc.presentation.utils.base.*
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.MANDATORY_LIST
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_REQUEST_CODE
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.SCAN_DOCUMENT_RESULTS_REQUEST_CODE
-import com.lib.ekyc.presentation.utils.base.PERMISSION_RESULT
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.DocumentExtractHandler
 import com.lib.ekyc.presentation.utils.mlkit.textdetector.EkycTextRecognitionProcessor
 import com.otaliastudios.cameraview.CameraListener
@@ -100,7 +97,7 @@ class ExtractDocumentActivity : BaseActivity(), DocumentExtractHandler {
         return File(directory, fileName.toString() + ".jpg").absolutePath
     }
 
-    fun refreshView() {
+    private fun refreshView() {
         binding.preview.setImageResource(0)
         binding.captureBtn.slideUp()
         binding.refreshImgv.slideDown()

@@ -7,7 +7,6 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import com.lib.ekyc.presentation.utils.toast
 
 open class BaseActivity : AppCompatActivity() {
     open fun showMessage(msg: String?) {

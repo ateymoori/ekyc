@@ -1,8 +1,5 @@
 package com.lib.ekyc.presentation.utils.base
 
-import com.lib.ekyc.presentation.utils.fixZero
-import com.lib.ekyc.presentation.utils.log
-
 class DateUtil {
     companion object {
 

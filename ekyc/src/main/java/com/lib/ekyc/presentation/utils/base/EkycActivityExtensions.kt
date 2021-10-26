@@ -1,23 +1,16 @@
-package com.lib.ekyc.presentation.utils
+package com.lib.ekyc.presentation.utils.base
 
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
 import android.util.DisplayMetrics
-import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.marginBottom
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 
-fun Int.dpToPx(): Int {
-    return (this * Resources.getSystem().displayMetrics.density).toInt()
-}
+
 
 @Suppress("DEPRECATION")
 fun Context?.width(): Int {
@@ -40,14 +33,6 @@ fun String?.bodyOrNull(): String {
         ""
     else
         this
-}
-
-fun Activity.shortToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-}
-
-fun Activity.longToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
 
 fun View.slideUp() {

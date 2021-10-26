@@ -16,11 +16,11 @@ import com.lib.ekyc.presentation.utils.base.KYC.Companion.BIRTHDATE
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.EXPIRY
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.NFC_TIMEOUT
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.PASSPORT_NUMBER
-import com.lib.ekyc.presentation.utils.gone
+import com.lib.ekyc.presentation.utils.base.gone
 import com.lib.ekyc.presentation.utils.nfc.Image
 import com.lib.ekyc.presentation.utils.nfc.ImageUtil
-import com.lib.ekyc.presentation.utils.toast
-import com.lib.ekyc.presentation.utils.visible
+import com.lib.ekyc.presentation.utils.base.toast
+import com.lib.ekyc.presentation.utils.base.visible
 import net.sf.scuba.smartcards.CardService
 import org.jmrtd.BACKey
 import org.jmrtd.BACKeySpec

@@ -18,7 +18,7 @@ class EkycTextRecognitionProcessor(
 
     private fun runTextRecognition(bitmap: Bitmap) {
         val image = InputImage.fromBitmap(bitmap, 0)
-        val recognizer = TextRecognition.getClient()
+        val recognizer = TextRecognition.getClient(null)
 
         recognizer.process(image)
             .addOnSuccessListener { visionText ->

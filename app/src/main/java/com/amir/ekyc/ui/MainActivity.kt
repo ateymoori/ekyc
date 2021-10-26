@@ -12,7 +12,7 @@ import com.lib.ekyc.presentation.ui.face.FaceDetectionActivity
 import com.lib.ekyc.presentation.utils.base.KYC
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.IMAGE_URL
 import com.lib.ekyc.presentation.utils.base.KYC.Companion.RESULTS
-import com.lib.ekyc.presentation.utils.toast
+import com.lib.ekyc.presentation.utils.base.toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,5 @@
 package com.lib.ekyc.presentation.utils.base
 
-import android.graphics.Bitmap
 import org.jmrtd.lds.icao.MRZInfo
 import java.io.Serializable
 
@@ -15,8 +14,6 @@ data class PassportDetailsEntity(
     var secondaryIdentifier: String?,
     var primaryIdentifier: String?,
     var imageURI: String? = null
-//    ,
-//    var imageBitmap: Bitmap? = null
 ) : Serializable
 
 fun MRZInfo.toPassportDetail(): PassportDetailsEntity {
